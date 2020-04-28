@@ -1,0 +1,546 @@
+body{
+    margin:0;
+    padding: 0;
+    background-color:white;
+    font-family:"calibri";
+    background-size:cover;
+    background-repeat: no-repeat;
+}
+
+/*
+    Scroll bar
+*/
+
+
+
+::-webkit-scrollbar {
+    width: 15px;
+  }
+
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey; 
+    border-radius: 10px;
+  }
+::-webkit-scrollbar-thumb {
+    background:#676D78; 
+    border-radius: 10px;
+  }
+ ::-webkit-scrollbar-thumb:hover {
+    background: #2D3036; 
+  }  
+
+
+#text-logo{
+    font-family: 'Alex Brush', cursive;
+    font-size: 30px;
+}
+#globe, #home, #cloche, #chart, #mail{
+    font-size: 40px;
+    transition:0.5s all;
+    
+}
+
+#globe:hover{
+    font-size: 41px;
+    transition:0.5s all;
+}
+#cloche:hover{
+    font-size: 41px;
+    transition:0.5s all;
+}
+#chart:hover{
+    font-size: 41px;
+    transition:0.5s all;
+}
+#mail:hover{
+    font-size: 41px;
+    transition:0.5s all;
+}
+
+#info{
+    border: none;
+    background:whitesmoke;
+}
+
+#profile{
+    border-radius: 50px;
+    
+  }
+  
+
+#first-container{
+    width: 100%;
+}
+ 
+#text-covid{
+    color:#068AC3;
+    font-size: 15px;
+    font-family: 'Anton', sans-serif;
+}
+
+.btn #search{
+    font-size: 30px;
+}
+
+#text-card{
+    
+    color:grey;
+    padding: 15px;
+    
+}
+
+
+#Recherche{
+    height: 40px;
+}
+
+#continuer{
+    font-size:40px;
+    color:grey;
+    margin-top:50px;
+}
+
+#corps-acceuil{
+    margin-top:20px
+}
+
+#titre1{
+    font-size: 30px;
+}
+
+#apropos{
+    border:2px solid grey;
+    background-color: white;
+    margin-top: 2%;
+}
+
+#blub{
+    font-size: 50px;
+}
+
+#c1{
+    background-image: url("../image/conseil1.jpg");
+    background-size: cover;
+    background-repeat: no-repeat; 
+    height: 430px;   
+}
+
+#c2{
+    background-image: url("../image/conseil22.jpg");
+    background-size: cover;
+    background-repeat: no-repeat; 
+
+}
+
+#c3{
+    background-image: url("../image/conseil44.jpg");
+    background-size: cover;
+    background-repeat: no-repeat; 
+}
+#c4{
+    background-image: url("../image/conseil5.jpg");
+    background-size: cover;
+    background-repeat: no-repeat; 
+}
+#c1, #c2, #c3, #c4{
+    margin-top:4%;
+}
+
+
+#sous-titre{
+    color:whitesmoke;
+}
+#sous-titre1{
+    color:whitesmoke;
+    font-size: 20px;
+}
+
+.list-flex .liste-item{
+ color:white;
+ font-size: 26px;
+}
+
+#paragraph{
+    font-size: 18.5px;
+}
+#c4-text{
+    margin-top: 65px;
+}
+
+#btn-voir{
+    border:2px solid whitesmoke;
+
+}
+#btn-voir:hover{
+ color:grey;
+ transition: 0.4;
+}
+
+#logo-globe{
+    color: whitesmoke;
+    font-size: 60px;
+}
+
+.bs-footer{
+    background-image:url("../image/login.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    
+}
+
+ul .list-block-item{
+    list-style-type: none;
+}
+
+#last-word{
+    font-size: 20px;
+}
+
+#logo-footer{
+    font-size: 30px;
+}
+
+#axe3{
+    margin-right: 100px;
+}
+#deconnexion{
+    position: absolute;
+    position:fixed;
+    z-index: 999;   
+}
+
+#content-first{
+    background-image: url("../image/dream.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin-top: 15px;
+    
+}
+
+#h1-content-firt{
+    font-family:'Alex brush', cursive;
+}
+
+#content-first-text{
+    font-family: 'Anton', sans-serif;
+    margin-top: 42%;
+}
+
+#content-offre{
+    background-image: url("../image/offre1.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#content-first-text{
+    font-size:50px;
+}
+
+#sous-titre{
+    font-family: 'Courgette', cursive;
+    font-size: 20px;
+}
+
+#after-image{
+    font-family: 'Alex Brush', cursive;
+    font-size: 50px;
+}
+
+#form-offre{
+    background-color: whitesmoke;
+}
+
+#departement{
+font-family:"Alex Brush", cursive;
+ font-size:30px;
+color:grey;
+background-color: whitesmoke; 
+  border: none;
+
+}
+
+#contrat{
+    font-family: calibri;
+    font-weight: bolder;
+    background-color: whitesmoke;
+    color: grey;
+    border:none;
+}
+
+#offre-location{
+    font-family: "calibri";
+    font-size:12px;
+    color:grey;
+    background-color: whitesmoke; 
+    border: none;
+}
+
+#poste{
+    text-decoration:underline orange;
+}
+
+#poste-text{
+    background-color: whitesmoke;
+    border: none;
+    font-family: calibri;
+    font-size: 20px;
+    color:grey;
+}
+
+.content-info{
+    border:2px solid grey;
+}
+
+.text-info .info-txt{
+    font-family: "Alex Brush", cursive;
+    font-size: 25px;
+}
+
+#col-signature h2{
+    font-family: "Alex Brush", cursive;
+    text-decoration:underline grey;
+}
+
+  .liste-poste{
+    height: 700px;
+    overflow-y: auto;
+  }
+
+.card #poste-card{
+    background-image: url("../image/login1.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.card #poste-card{
+    color:#F5F5F5;
+}
+
+#media-public{
+    background-image: url("../image/msg2.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#page{
+    background-image: url("../image/msg2.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#offre-banner{
+    background-image: url("../image/msg2.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    opacity: 0.8;
+}
+
+/*
+]]]]]]]]]]]]]]]     ]]]]]]]]]]]     ]]]]]       ]]]]
+]]]]]]]]]]]]]]     ]]]]]]]]]]]]]    ]]]]]]     ]]]]]
+]]]               ]]]]]    ]]]]]    ]]]]]]]    ]]]]
+]]]              ]]]]]]   ]]]]]]    ]]]]]]]]]]]]]]]
+]]]              ]]]]]]]]]]]]]]]    ]]]]]]   ]]]]]]
+]]]]]]]]]]]]]]  ]]]]]]   ]]]]]]     ]]]]]      ]]]]
+]]]]]]]]]]]]]]  ]]]]]     ]]]]]     ]]]]]
+
+    Partie Candidat
+*/
+
+#icon-cv{
+    font-size: 40px;
+    transition:0.5s all;
+}
+
+#banner{
+    background-image: url("../image/candidat/promo.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.h-list{
+    text-decoration: underline #6D747F;
+}
+
+#banner h1{
+ font-family: 'Bebas Neue', cursive;
+ color:#A2B4BF;
+}
+
+#liste-logo li{
+    margin-left: 10px;
+}
+
+#content-second{
+    background-image:url("../image/candidat/imgbtm1.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#smarta{
+    font-family: 'Alex Brush', cursive;
+    font-size: 50px;
+}
+
+#partie_cv{
+    font-weight: bolder;
+}
+
+.content-list li{
+    list-style-type: none;
+}
+.content-list a{
+    font-size: 18px;
+}
+
+.content-cv_name{
+    border-top:3px solid #6D747F;
+    border-left: 3px solid #6D747F;
+    border-right:3px solid #6D747F;
+}
+
+.form-cv{
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.form-cv #profession{
+    border: none;
+    background-color: #F8F9FA;
+    text-align: center;
+}
+.form-cv input{
+    border: none;
+    background-color: #F8F9FA;
+    font-family: 'Times New Roman', Times, serif;
+    height: 150%;
+}
+
+#break-hr{
+    border: 1.3px solid #6D747F;
+}
+
+.sections{
+    background-color: #45AFC8;
+    color: white;
+    height: 32px;
+    font-family: 'Calibri';
+    font-size: 20px;
+    text-align: center;
+}
+
+#projet1{
+    border:none;
+    font-family: 'Times New Roman', Times, serif;
+    background: #F8F9FA;
+}
+
+#projet2{
+    border:none;
+    font-family: 'Times New Roman', Times, serif;
+    background: #F8F9FA;
+}
+
+
+#exp-cv{
+    border:none;
+    font-family: 'Times New Roman', Times, serif;
+    background: #F8F9FA;
+}
+
+#exp-cv2{
+    border:none;
+    font-family: 'Times New Roman', Times, serif;
+    background: #F8F9FA;
+}
+
+#dest{
+    height: 34px;
+}
+
+#alert-danger-cv{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+#success{
+    position:absolute;
+    z-index: 999;
+}
+
+.content-header h1{
+    font-family: 'Fredoka One', cursive;
+}
+
+#publication{
+    height: 700px;
+    overflow-y: auto;
+}
+
+#employes{
+    height: 550px;
+    overflow-y: auto;
+}
+
+
+#btnOption1, #btnOption2{
+    width: 12rem; height: 8rem;
+    transition:1s;
+}
+
+#icon-option1{
+    margin-top: -15px;
+}
+
+#icon-option2{
+    color:'#C41494';
+}
+#icon-option1, #icon-option2{
+    font-size: 60px;
+}
+#btnOption1:hover, #btnOption2:hover{
+    transition:0.4s;
+    border-top: 8px solid white;
+    border-left: 8px solid white;
+    border-right: 8px solid white;
+    border-bottom: 8px solid white;
+    font-size: 52px;
+}
+
+
+
+#edit_departement{
+    font-family:"Alex Brush", cursive;
+     font-size:30px;
+    color:grey;
+    background-color: whitesmoke; 
+      border: none;
+    
+    }
+    
+    #edit_contrat{
+        font-family: calibri;
+        font-weight: bolder;
+        background-color: whitesmoke;
+        color: grey;
+        border:none;
+    }
+    
+    
+    #poste{
+        text-decoration:underline orange;
+    }
+    
+    #edit_poste-text{
+        background-color: whitesmoke;
+        border: none;
+        font-family: calibri;
+        font-size: 20px;
+        color:grey;
+    }
+
+
+    #favoris{
+        background-image: url("../image/msg2.png");
+        background-repeat: no-repeat;
+        background-size: cover;
+        opacity: 0.9;
+    }

@@ -1,0 +1,22 @@
+#corps-deconnexion{
+   
+}
+
+#c_btn-start, #e_btn-start{
+    background: purple;
+      transition: 1s all;
+  
+  }
+  
+  #btn-start:hover{
+    background: #550055;
+    transition: 0.7s all;
+  }
+
+  #col-form{
+      background-image: url("../image/msg2.png");
+      background-repeat: no-repeat;
+      background-size: cover;
+      opacity: 0.9;
+  }
+  

@@ -1,0 +1,36 @@
+body{
+  font-family: arial;
+  background: red;
+}
+
+.jumbotron{
+  background:whitesmoke;
+}
+#titreJum{
+  color:grey;
+    position:absolute;
+      z-index: 999;
+}
+
+.lead{
+  color:grey;
+  font-size: 16px;
+  position:absolute;
+  z-index: 999;
+}
+
+#BTNentreprise{
+  height: 200px;
+  width: 200px;
+    border:2px solid;
+}
+
+#BTNcondidat{
+  height: 200px;
+  width: 200px;
+  border:2px solid;
+}
+
+.far{
+  font-size: 50px;
+}
