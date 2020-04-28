@@ -1,0 +1,285 @@
+{extends file="src/view/templates/index.html"}
+
+
+{block name="menu"}
+<ul class="nav justify-content-center">
+    <li class="nav-item" data-toogle="tooltip" title="Acceuil">
+        <a href="{$url_base}Candidat/index" class="nav-link active text-secondary"><ion-icon name="home-sharp" id="home"></ion-icon></a>
+    </li>                   
+    <li class="nav-item">                 
+       <a href="{$url_base}Candidat/CV" class="nav-link text-secondary" data-toogle="tooltip" title="CV"><ion-icon name="reader-sharp" id="icon-cv"></ion-icon></a>
+    </li>
+    <li class="nav-item">
+        <a href="{$url_base}Candidat/Mesfavoris" class="nav-link text-secondary" data-toogle="tooltip" data-placement="top" title="Favoris"><ion-icon name="mail-sharp" id="mail"></ion-icon></a>
+    </li>
+    <li class="nav-item">
+        <a href="{$url_base}candidat/publication" class="nav-link text-secondary notif" data-toogle="tooltip"  title="Notifications"><ion-icon name="notifications-sharp" id="cloche"></ion-icon>{foreach from=$notif item=$count}<p class="badge badge-danger count">{if $count eq 0}{else}{$count}{/if}</p>{/foreach}</a>
+        
+    </li>
+    
+</ul>
+{/block}
+
+
+
+{block name="info"}
+<img src="{$url_base}public/image/candidat/{$smarty.session.image}" class="align-self-start mw-10 rounded" width="100px" alt="">
+<div class="media-body mt-3 ml-2">
+        <p class="h5 text-secondary" style="text-decoration:underline"><strong>Votre profile <ion-icon name="person-sharp"></ion-icon></strong></p>
+        <p class=" text-start text-secondary"><ion-icon name="man-sharp"></ion-icon><strong> {$smarty.session.c_nom} {$smarty.session.prenom}</strong></p>
+        <p class=" text-start text-secondary"><ion-icon name="earth-sharp"></ion-icon><strong> {$candidat->getPays()}</strong></p>
+        <p class=" text-start text-secondary"><ion-icon name="at"></ion-icon><strong>  {$candidat->getAdresse()}</strong></p>
+     
+</div>
+{/block}
+
+<!--Implémentation btn login out-->
+{block name="login_out"}
+        <form action="{$url_base}Candidat/Deconnexion" method="POST">
+            <button class="btn btn-secondary btn-sm rounded-circle mr-2" data-toogle="tooltip" title="login out" name="exit" value="quitter"><ion-icon name="exit"></ion-icon></button>
+        </form>
+{/block}
+
+{block name="candidat"}
+<div class="carousel slide" data-ride="carousel" id="carousel-left">
+    <div class="carousel-inner">
+        <div class="carousel-item active" data-interval="10000">
+            <img src="{$url_base}public/image/img3.png" class="d-block" width="270" alt="image">
+        </div>
+        <div class="carousel-item" data-interval="10000">
+            <img src="{$url_base}public/image/img4.png" class="d-block" width="265" alt="image">
+        </div>
+    </div>
+</div>
+{/block}
+
+{block name="index"}
+
+<div class="container-fluid-lg">
+    <div class="navbar navbar-expand-md bg-dark d-md-block justify-content-between sticky-top d-lg-none" role="navigation">
+        <a href="{$url_base}Candidat/index" class="navbar-brand">
+            <img src="{$url_base}public/image/imgcool.png" class="d-block mx-auto" width="33px"alt="">
+            <span class="text-secondary" id="text-logo"><strong>Smarta</strong></span>
+        </a>
+        <ul class="nav justify-content-end">
+            <li class="nav-item "><a href="{$url_base}Candidat/index" class="nav-link active text-secondary" data-toogle="tooltip" data-placement="top" title="Acceuil"><ion-icon name="home-sharp" id="home"></ion-icon></a></li>                                
+            <li class="nav-item "><a href="{$url_base}Candidat/CV" class="nav-link text-secondary" data-toogle="tooltip" data-placement="top" title="CV"><ion-icon name="reader-sharp" id="globe"></ion-icon></a></li>                               
+            <li class="nav-item "><a href="{$url_base}Candidat/Mesfavoris" class="nav-link text-secondary" data-toogle="tooltip" data-placement="top" title="Favoris"><ion-icon name="mail-sharp" id="mail"></ion-icon></a></li>          
+            <li class="nav-item "><a href="{$url_base}candidat/publication" class="nav-link text-secondary" data-toogle="tooltip" data-placement="top" title="Publication"><ion-icon name="notifications-sharp" id="mail"></ion-icon></a></li>          
+            
+        </ul>
+    </div>    
+    <div class="jumbotron d-none d-lg-block" id="banner">
+      <div class="row justify-content-end mb-5">
+          <div class="col-sm-8">
+            <h1 class="display-4"><strong>Faites vos demandes d'emploi gratuitement avec Smarta</strong></h1>
+          </div>
+      </div>
+      <div class="row justify-content-end mt-5">
+        <div class="col-md-6">
+            <ul class="list-inline" id="liste-logo">
+                <li class="list-inline-item">
+                    <img src="{$url_base}public/image/candidat/logo5.png" width="100px" alt="logo">
+                </li>
+                <li class="list-inline-item">
+                    <img src="{$url_base}public/image/candidat/log2.png" width="100px" alt="logo2">
+                </li>
+            </ul>
+        </div>
+    </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-sm-3 d-sm-none d-lg-block w-100" data-aos="fade-right" data-aos-duration="3000">
+            <div class="container" id="apropos">
+                        <p class="text-center text-secondary"><strong>Pourquoi Smarta</strong></p>
+                    <div class="row mt-3 justify-content-center">
+                       <div class="container">
+                           <div class="row justify-content-center">
+                               <img src="{$url_base}public/image/search.svg" width="25%" alt="loupe">
+                           </div>
+                           <p class="text-center text-secondary"><Strong>Trouvez les meilleurs candidats</Strong></p>
+                               <p class="text-center" id="text-card">
+                                   Parmi les milliers de nouvelle candidature publiées chaque mois sur Smarta ! 
+                               </p>
+                       </div>                                              
+                    </div>                                       
+            </div>
+       </div> 
+            <div class="col-sm-3 d-sm-none d-lg-block" data-aos="fade-right" data-aos-duration="2000">
+                <div class="container" id="apropos">                                    
+                          <p class="text-secondary text-center"><strong>Offer bar</strong></p>
+                            <div class="row justify-content-center mt-3">
+                                <div class="container">
+                                    <div class="row justify-content-center">
+                                        <img src="{$url_base}public/image/bar.svg" width="25%" alt="chart">
+                                    </div>
+                                    <p class="text-center text-secondary"><strong>Verifiez le nombre de personnes atteintes</strong></p>
+                                        <p class="text-center" id="text-card">
+                                            Grâce à cette option vous pouvez contrôler le nombre de personnes que vous atteignez.            
+                                        </p>
+                                </div>            
+                            </div> 
+                </div>
+            </div>
+            <div class="col-sm-3 d-sm-none d-lg-block" data-aos="fade-right" data-aos-duration="1000">
+                <div class="container" id="apropos">
+                    <p class="text-secondary text-center"><strong>Analyse</strong></p>
+                    <div class="row justify-content-center">
+                        <div class="container">
+                            <div class="row justify-content-center">
+                                <img src="{$url_base}public/image/analyse.svg" width="25%" alt="analyse">
+                            </div>
+                        </div>
+                        <p class="text-center text-secondary"><strong>Analyser chaque potentiel</strong></p>
+                        <p class="text-center" id="text-card">
+                            chaque candidat vous enverra un cv, à vous de juger leur compétence, soyez indulgent sur certains points lors de vos analyses.
+                        </p>
+                    </div>
+                </div>
+            </div>
+    </div>
+    <div class="row justify-content-center d-md-block d-lg-none mt-5  mb-5">
+        <div class="col-sm-12">
+            <form action="#">
+                <div class="input-group">
+                    <input type="text" class="form-control rounded btn-light" id="Recherche" placeholder="Rechercher">
+                    <div class="input-group-prepend">
+                        <button class="btn btn-secondary rounded-circle"><ion-icon name="search"></ion-icon></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <p class="text-secondary mt-5" id="continuer"><ion-icon name="chevron-down-circle-sharp"></ion-icon></p>
+    </div>
+
+    <div class="row justify-content-start">
+        <h1 class="text-secondary ml-3"><strong>Nos conseils <ion-icon name="bulb-sharp"></ion-icon></strong></h1>
+    </div>
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-12">
+           <ul class="list-inline">
+                <li>
+                    <div class="row">
+                        <div class="col-sm-5 shadow">
+                            <img src="{$url_base}public/image/candidat/logo11.png" width="200px" alt="">
+                        </div>
+                        <div class="col-sm-6">
+                            <h2 class="text-secondary h-list"><strong>Votre profession</strong></h2>
+                            <p class="text-secondary">
+                                Quelque soit votre profession, sachez que toutes les ONG sont dessus, et peuvent
+                                avoir l'oeil sur vous. Correspondez au profil, et saisissez l'occasion.
+                            </p>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row mt-5">
+                        <div class="col-sm-5 shadow">
+                            <img src="{$url_base}public/image/candidat/logo14.png" width="200px" style="padding: 15px;" alt="">
+                        </div>
+                        <div class="col-sm-6">
+                            <h2 class="text-secondary h-list"><strong>Curiculum vitae</strong></h2>
+                            <p class="text-secondary">
+                              Votre cv est comme un passeport, toute vos informations doivent y figurer,
+                              afin que vous soyez recruté, il est important d'ailleurs que vous aillez une 
+                              petite experience dans un certain domaine 
+                            </p>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row jsutify-content-center mt-5">
+                        <div class="col-sm-5 shadow">
+                            <img src="{$url_base}public/image/candidat/logo12.png" width="280px" style="padding: 15px;" alt="">
+                        </div>
+                        <div class="col-sm-6">
+                            <h2 class="text-secondary h-list"><strong>Vos entretiens</strong></h2>
+                            <p class="text-secondary">
+                               Vous serez recruté et ils s'interèsseront d'avantage à votre profil, ils testeront votre 
+                               capacité, et ils vous jugerons.D’après les recruteurs, les candidats manquent de certaines compétences. De quelles compétences considérez-vous manquer ?
+                            </p>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row jsutify-content-center mt-5">
+                        <div class="col-sm-5 shadow">
+                            <img src="{$url_base}public/image/candidat/logo5.png" width="200px" style="padding: 30px;" alt="">
+                        </div>
+                        <div class="col-sm-6">
+                            <h2 class="text-secondary h-list"><strong>Votre engagement</strong></h2>
+                            <p class="text-secondary">
+                               tout le monde n'a pas forcément la même opportunité, mais si vous atteignez à ce point, vous aurez donc réussi
+                               votre entretien
+                            </p>
+                        </div>
+                    </div>
+                </li><iframe src="" frameborder="0"></iframe>
+           </ul>
+        </div>
+    </div>
+</div>
+{/block}
+{block name="logos"}
+    <div class="row justify-content-center" style="background-color: #F5F5F5;">
+        <div class="col-sm-10 p-md-5 mt-5">
+            <h1 class="text-secondary text-center" id="smarta"><strong>Smarta <img src="{$url_base}public/image/imgcool.png" width="50" alt=""></strong></h1>
+            <p class="text-secondary text-center" style="font-size: 18px;">
+               <strong> Leader numéro un dans la recherche d'emploi</strong>
+            </p>
+            <p class="text-secondary text-center">Plusieurs clients nous font confiances,<br> vous aussi faites nous confiance,<br> parce que votre maison c'est nous.</p>
+        </div>
+        <div class="col-sm-5">
+            <img src="{$url_base}public/image/img6.png"  class=" mt-0 w-100 d-none d-sm-block" alt="">
+        </div>
+    </div>
+{/block}
+{block name="partenariat"}
+    <footer id="footer-candidat">
+        <div class="container-fluid-lg" >
+            <div class="jumbotron shadow"style="margin-top:-48px;" id="content-second">
+                <div class="row justify-content-end">
+                    <div class="col-xs-12 mr-5">
+                        <h1 class="text-white" id="h1-content-firt">Nos partenaires</h1>
+                        <ul class="list-inline"> 
+                            <li class="list-inline-item">
+                                <img src="{$url_base}public/image/partenaire1.png" width="90px" alt="EMI">
+                            </li>
+                            <li class="list-inline-item">
+                                <img src="{$url_base}public/image/partenaire2.png" width="90px" alt="EMI">
+                            </li>
+                            <li class="list-inline-item">
+                                <img src="{$url_base}public/image/partenaire3.png" width="190px" alt="EMI">
+                            </li>
+                            
+                        </ul>
+                    </div>
+                </div>
+                <div class="row justify-content-start">
+                    <div class="col-md-5">
+                        <h1 class="text-white mb-5" id="content-first-text">
+                            Faites vous recruter plus facilement par une entreprise
+                        </h1> 
+                        <div class="row justify-content-start">
+                            <form  action="{$url_base}Candidat/CV">
+                                <div class="row mx-auto">
+                                    <div class="col">
+                                        <button class="btn btn-info btn-lg mb-5">Faire une demande d'emploi</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+{/block}
+
+{block name="logo-link"}
+<a href="{$url_base}Candidat/index">
+    <img src="{$url_base}public/image/imgcool.png" data-toogle="tooltip" title="Acceuil" class="d-block mx-auto" width="90px" alt="logo">
+</a>
+{/block}

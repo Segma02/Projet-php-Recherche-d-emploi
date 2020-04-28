@@ -1,0 +1,138 @@
+{extends file="src/view/templates/index.html"}
+
+
+
+
+{block name="menu"}
+<ul class="nav justify-content-center">
+    <li class="nav-item" data-toogle="tooltip" title="Acceuil">
+        <a href="{$url_base}Entreprise/index" class="nav-link active text-secondary"><ion-icon name="home-outline" id="home"></ion-icon></a>
+    </li>                   
+    <li class="nav-item">                 
+       <a href="{$url_base}Entreprise/Offre" class="nav-link text-secondary" data-toogle="tooltip" title="Les offres"><ion-icon name="earth-outline" id="globe"></ion-icon></a>
+    </li>
+    <li class="nav-item">
+        <a href="{$url_base}Entreprise/CVthèque" class="nav-link text-secondary" data-toogle="tooltip" data-placement="top" title="CVthèque"><ion-icon name="newspaper-outline" id="mail"></ion-icon></a>
+    </li>
+    <li class="nav-item">
+        <a href="{$url_base}Entreprise/Publication" class="nav-link text-secondary" data-toogle="tooltip"  title="Notifications"><ion-icon name="notifications-outline" id="cloche"></ion-icon>{foreach from=$notif item=$count}<p class="badge badge-danger">{if $count eq 0}{else}{$count}{/if}</p>{/foreach}</a>
+    </li>
+    
+</ul>
+{/block}
+
+{block name="info"}
+<img src="{$url_base}public/image/entreprise/{$entreprise->getImage()}" class="align-self-start mt-3" width="120px" alt="">
+<div class="media-body mt-3 ml-2">
+        <p class="h5 text-secondary" style="text-decoration:underline"><strong>Votre profile <ion-icon name="business-sharp"></ion-icon></strong></p>
+        <p class=" text-start text-secondary"><ion-icon name="business-sharp"></ion-icon><strong> {$smarty.session.nom}</strong></p>
+        <p class=" text-start text-secondary"><ion-icon name="earth-sharp"></ion-icon><strong> {$entreprise->getPays()}</strong></p>
+        <p class=" text-start text-secondary"><ion-icon name="shield-sharp"></ion-icon><strong> {$entreprise->getStatut()}</strong></p>
+     
+</div>
+{/block}
+
+<!--Deconnexion-->
+{block name="login_out"}
+<form action="{$url_base}Entreprise/Deconnexion" method="POST">
+    <button class="btn btn-secondary btn-sm rounded-circle" data-toogle="tooltip" title="login out" name="exit" value="deconnexion"><ion-icon name="exit"></ion-icon></button>
+</form>
+{/block}
+
+
+{block name="index"}
+<div class="row justify-content-center">
+    <div class="col-md-3 mt-5">
+        <div class="spinner-grow text-center" style="width: 5rem; height: 5rem; margin-top:25%;" role="status">
+            <span class="sr-only">Loading</span>
+         </div>
+    </div>
+</div>
+<div class="container-fluid-lg" id="container_candidat">
+   
+        {foreach from=$count item=$value}
+        {if $value !=0}
+        <div class="navbar navbar-expand-lg bg-dark d-md-block justify-content-between sticky-top d-lg-none" role="navigation">
+            <a href="{$url_base}Entreprise/index" class="navbar-brand">
+                <img src="{$url_base}public/image/imgcool.png" class="d-block mx-auto" width="33px"alt="">
+                <span class="text-secondary" id="text-logo"><strong>Smarta</strong></span>
+            </a>
+            <ul class="nav justify-content-end">
+                <li class="nav-item "><a href="{$url_base}Entreprise/index"   class="nav-link active text-secondary"><ion-icon name="home-outline" id="home"></ion-icon></a></li>                                
+                <li class="nav-item "><a href="{$url_base}Entreprise/Offre" class="nav-link text-secondary"><ion-icon name="earth-sharp" id="globe"></ion-icon></a></li>                               
+                <li class="nav-item "><a href="{$url_base}Entreprise/CVthèque" class="nav-link text-secondary"><ion-icon name="mail-sharp" id="mail"></ion-icon></a></li>          
+                <li class="nav-item "><a href="{$url_base}Entreprise/Publication" class="nav-link text-secondary"><ion-icon name="notifications-sharp" id="mail"></ion-icon></a></li>          
+                
+            </ul>
+        </div>
+            <div class="row justify mt-4">
+                <div class="col-xs-12" data-aos="zoom-in-down" data-aos-duration="2000">
+                    <h1 class="text-secondary p-sm-3"><strong>Candidats préselectionnés  <img src="{$url_base}public/image/validation/validhand.png" width="50" class="" alt=""></strong></h1>
+                    <p class="text-secondary  p-sm-3 mt-0">Voici les candidats que vous avez recruté sur <span style="font-family: 'Alex Brush', cursive; font-size: 25px; font-weight: bolder;">Smarta <img src="{$url_base}public/image/imgcool.png" width="30px" alt=""></span></p>
+                </div>
+            
+            </div>
+            <div class="row">
+               
+                <div class="col-md-6" id="employes">
+                    {foreach from=$employed item=$value}
+                        <div class="card bg-dark shadow mt-3">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-sm-12">  
+                                        <div id="Publication">
+                                            <img src="{$url_base}public/image/candidat/{$value->getPhoto()}" width="40px" alt="">
+                                            <span class="text-secondary"><strong>  {$value->getNom()} {$value->getPrenom()}(desormais menbre de {$value->getDestination()})</strong></span>
+                                            <p class="text-primary"><ion-icon name="at"></ion-icon>{$value->getAdresse()}</p>
+                                            <p class="text-secondary" style="margin-top: -12px;"><ion-icon name="flag-sharp"></ion-icon> {$value->getLieu()}</p>
+                                            <p class="text-secondary" style="margin-top: -12px;"><ion-icon name="call-sharp"></ion-icon> {$value->getTel()}</p>
+                                            <p class="text-secondary" style="margin-top: -12px;"><ion-icon name="person"></ion-icon> {$value->getProfession()}</p>
+                                        </div>            
+                                    </div>   
+                                </div>
+                            </div>
+                        </div>
+                    {/foreach}
+                </div>
+                <div class="col-md-6">
+                    
+                </div>
+            </div>
+        {else}
+        <div class="row justify-content-center" id="page">
+            <div class="col-md-12" style="margin-top:25%;" data-aos="zoom-in-down" data-aos-duration="2000">
+                <h1 class="text-secondary text-center"id="message-1"><strong>CVthèque non disponible <ion-icon name="mail-open-sharp"></ion-icon></strong></h1>
+               <p class="text-secondary text-center" id="message-2">Vous n'avez pas encore recruté pour le moment</p>
+             </div>
+        </div>
+        {/if}
+        {/foreach}
+</div>
+{/block}
+{block name="entreprise"}
+<img src="{$url_base}public/image/imgleft.png" class="d-block"  width="350px;" alt="image">
+{/block}
+
+{block name="logos"}
+<ul class="list-inline">
+    <li class="list-inline-item">
+        <img src="{$url_base}public/image/logo2.png" width="200" alt="">
+    </li>
+    <li class="list-inline-item">
+        <img src="{$url_base}public/image/logo3.png" width="200" alt="">
+    </li>
+    <li class="list-inline-item">
+        <img src="{$url_base}public/image/logo4.png" width="200" alt="">
+    </li>
+    <li class="list-inline-item">
+        <img src="{$url_base}public/image/login6.png" width="200" alt="">
+    </li>
+</ul>
+{/block}
+{block name="logo-link"}
+<a href="{$url_base}Candidat/index">
+    <img src="{$url_base}public/image/imgcool.png" data-toogle="tooltip" title="Acceuil" class="d-block mx-auto" width="90px" alt="logo">
+</a>
+{/block}
+
+

@@ -1,0 +1,148 @@
+{extends file="src/view/templates/index.html"}
+
+
+
+{block name="menu"}
+<ul class="nav justify-content-center">
+    <li class="nav-item" data-toogle="tooltip" title="Acceuil">
+        <a href="{$url_base}Candidat/index" class="nav-link active text-secondary"><ion-icon name="home-sharp" id="home"></ion-icon></a>
+    </li>                   
+    <li class="nav-item">                 
+       <a href="{$url_base}Candidat/CV" class="nav-link text-secondary" data-toggle="tooltip" title="CV"><ion-icon name="reader-sharp" id="icon-cv"></ion-icon></a>
+    </li>
+    <li class="nav-item">
+        <a href="{$url_base}Candidat/Mesfavoris" class="nav-link text-secondary" data-toggle="tooltip" data-placement="top" title="Favoris"><ion-icon name="mail-sharp" id="mail"></ion-icon></a>
+    </li>
+    <li class="nav-item">
+        <a href="{$url_base}candidat/publication" class="nav-link text-secondary notif" data-toggle="tooltip"  title="Notifications"><ion-icon name="notifications-sharp" id="cloche"></ion-icon>{foreach from=$notif item=$count}<p class="badge badge-danger count">{if $count eq 0}{else}{$count}{/if}</p>{/foreach}</a>
+        
+    </li>
+    
+</ul>
+{/block}
+
+
+
+<!--Bar de navigation-->
+{block name="info"}
+<img src="{$url_base}public/image/candidat/{$smarty.session.image}" class="align-self-start rounded" width="100" alt="">
+<div class="media-body mt-3 ml-2">
+        <p class="h5 text-secondary" style="text-decoration:underline"><strong>Votre profile <ion-icon name="person-sharp"></ion-icon></strong></p>
+        <p class=" text-start text-secondary"><ion-icon name="man-sharp"></ion-icon><strong> {$smarty.session.c_nom} {$smarty.session.prenom}</strong></p>
+        <p class=" text-start text-secondary"><ion-icon name="earth-sharp"></ion-icon><strong> {$candidat->getPays()}</strong></p>
+        <p class=" text-start text-secondary"><ion-icon name="at"></ion-icon><strong>  {$smarty.session.c_adresse}</strong></p>
+     
+</div>
+{/block}
+
+<!--Implémentation btn login out-->
+{block name="login_out"}
+<form action="{$url_base}Candidat/Deconnexion" method="POST">
+    <button class="btn btn-secondary btn-sm rounded-circle mr-2" data-toogle="tooltip" title="login out" name="exit" value="quitter"><ion-icon name="exit"></ion-icon></button>
+</form>
+{/block}
+
+{block name="candidat"}
+<div class="mb-5">
+    <a href="https://www.who.int/fr/emergencies/diseases/novel-coronavirus-2019">
+        <img src="{$url_base}public/image/who-logo.png" width="200px;" class=" rounded mx-auto mb-5" alt="image">
+        </a>
+        <img src="{$url_base}public/image/image.gif.6a46fb16fc8b4c1cf98af1f0ec6e661f.gif" width="70" class="rounded mb-5 ml-3" alt="">
+</div>
+{/block}
+
+{block name="index"}
+    <div class="row justify-content-center">
+        <div class="spinner-grow text-center" style="width: 5rem; height: 5rem; margin-top:25%;" role="status">
+            <span class="sr-only">Loading</span>
+         </div>
+    </div>
+    <div class="container-fluid-lg" id="container_candidat">
+        <div class="navbar navbar-expand-md bg-dark d-md-block justify-content-between sticky-top d-lg-none" role="navigation">
+            <a href="{$url_base}Candidat/index" class="navbar-brand">
+                <img src="{$url_base}public/image/imgcool.png" class="d-block mx-auto" width="33"alt="">
+                <span class="text-secondary" id="text-logo"><strong>Smarta</strong></span>
+            </a>
+            <ul class="nav justify-content-end">
+                <li class="nav-item "><a href="{$url_base}Candidat/index" class="nav-link active text-secondary" data-toogle="tooltip" data-placement="top" title="Acceuil"><ion-icon name="home-sharp" id="home"></ion-icon></a></li>                                
+                <li class="nav-item "><a href="{$url_base}Candidat/CV" class="nav-link text-secondary" data-toogle="tooltip" data-placement="top" title="CV"><ion-icon name="reader-sharp" id="globe"></ion-icon></a></li>                               
+                <li class="nav-item "><a href="{$url_base}Candidat/Mesfavoris" class="nav-link text-secondary" data-toogle="tooltip" data-placement="top" title="Favoris"><ion-icon name="mail-sharp" id="mail"></ion-icon></a></li>          
+                <li class="nav-item "><a href="{$url_base}candidat/publication" class="nav-link text-secondary" data-toogle="tooltip" data-placement="top" title="Publication"><ion-icon name="notifications-sharp" id="mail"></ion-icon></a></li>          
+                
+            </ul>
+        </div>    
+        <div class="content">
+            <div class="content-header">
+                <div class="row justify-content-end mt-5" id="favoris">
+                    <div class="col-md-6">
+                        <div class="row justify-content-center">
+                            <div class="col-md-12">
+                                {foreach from=$count item=$value}
+                                {if $value !=0}
+                                <h1 class="text-secondary text-center"><strong>Vos Favoris <ion-icon name="mail-open-sharp"></ion-icon></strong></h1>
+                                <p class="text-secondary text-center">vos offres favorites sont affichées ici</p>
+                                {/if}
+                                {/foreach}
+                               
+                                    <div>
+                                        <img src="{$url_base}public/image/img3.png" class="d-block" style="opacity: 1;margin-top:10%;" width="510" height="755" alt="image">
+                                    </div>
+                             </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6" style="margin-top:10%;" id="publication">
+                            {foreach from=$count item=$value}
+                             {if $value !=0}
+                                 {foreach from=$favoris item=$value}
+                                       <div class="media shadow mb-3" id="media{$value->getId()}">
+                                           <img src="{$url_base}public/image/Entreprise/{$value->getImage()}" class="align-self-start mt-3 ml-3" width="50" alt="">
+                                           <button class="btn btn-default text-secondary btn-sm align-self-center mt-5 deleteFavoris" type="button" style="font-size: 25px;" value="{$value->getId()}" data-toggle="tooltip" title="Supprimer"><ion-icon name="trash-outline"></ion-icon></button>
+                                           <div class="media-body">
+                                                <p class="text-secondary h6 ml-3">{$value->getNom()}</p>
+                                                <span class="text-primary ml-3">{$value->getAdresse()}</span>
+                                               <div class="col-sm-12">
+                                                <div class="alert alert-secondary">
+                                                    {$value->getPoste()}
+                                                </div>
+                                               </div>
+                                            </div>
+                                       </div>      
+                                  {/foreach}
+                                {else}
+                                <div class="row justify-content-center" id="displayFavoris">
+                                    <div class="col-md-12" style="margin-top:25%;" data-aos="zoom-in-down" data-aos-duration="2000">
+                                        <h1 class="text-secondary text-center"id="message-1"><strong>Favoris non disponibles  <ion-icon name="mail-open-sharp"></ion-icon></strong></h1>
+                                       <p class="text-secondary text-center" id="message-2">Aucune offre n'a été désigné comme favoris pour le moment</p>
+                                     </div>
+                                </div>
+                                {/if}
+                            {/foreach}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{/block}
+
+{block name="logos"}
+<ul class="list-inline">
+    <li class="list-inline-item">
+        <img src="{$url_base}public/image/logo2.png" width="200" alt="">
+    </li>
+    <li class="list-inline-item">
+        <img src="{$url_base}public/image/logo3.png" width="200" alt="">
+    </li>
+    <li class="list-inline-item">
+        <img src="{$url_base}public/image/logo4.png" width="200" alt="">
+    </li>
+    <li class="list-inline-item">
+        <img src="{$url_base}public/image/login6.png" width="200" alt="">
+    </li>
+</ul>
+{/block}
+
+{block name="logo-link"}
+<a href="{$url_base}Candidat/index">
+    <img src="{$url_base}public/image/imgcool.png" data-toogle="tooltip" title="Acceuil" class="d-block mx-auto" width="90px" alt="logo">
+</a>
+{/block}

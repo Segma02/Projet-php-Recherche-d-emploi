@@ -1,0 +1,66 @@
+<div class="modal fade" id="modal{$cv->getId()}" tabindex="-1" role="dialog" aria-labelledby="icon" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                {if $cv->getDestination() neq "Public"}
+                <h4 class="text-secondary"><ion-icon name="business-sharp" id="icon"></ion-icon> envoyé à {$cv->getDestination()}</h4>
+                {else}
+                <h1  class="text-secondary"><ion name="earth-sharp" id="icon"></ion></h1>
+                {/if}
+                <button class="close" aria-label="closecv" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+            </div>
+                <div class="modal-body">
+                    <div>
+                        <div>
+                            <img src="{$url_base}public/image/candidat/{$cv->getPhoto()}" width="50" alt="">
+                        </div>
+                        <strong class="text-secondary"><ion-icon name="person"></ion-icon> {$cv->getProfession()}</strong>
+                        <p class="text-secondary mt-3" style="text-decoration: underline #616771;"><strong>Infos:</strong></p>
+                        <strong class="text-secondary mt-1"><ion-icon name="call-sharp"></ion-icon> {$cv->getTel()}</strong>
+                        <p class="text-secondary mt-1"><ion-icon name="at"></ion-icon> {$cv->getAdresse()}</p>
+                        <p class="text-secondary mt-1"><ion-icon name="home-sharp"></ion-icon> {$cv->getLieu()}</p>
+                    </div>
+                    <div class="row justify-content-start">
+                        <div class="col-sm-6">
+                            <div class="sections">
+                                <p><strong>Compétences</strong></p>
+                            </div>
+                            <p>{$cv->getCompetence()}</p>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="sections">
+                                <p><strong>Langues</strong></p>
+                            </div>
+                            <p>{$cv->getLangages()}</p>
+                        </div>
+                    </div>
+                    <div class="row justify-content-start">
+                        <div class="col-sm-6">
+                            <div class="sections">
+                                <p><strong>Projets</strong></p>
+                            </div>
+                            <p>{$cv->getProjet()}</p>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="sections">
+                                <p><strong>Experiences</strong></p>
+                            </div>
+                            <p>{$cv->getExperience()}</p>
+                        </div>
+                    </div>
+                </div>
+               
+               
+                    {if $cv->getAccepted() eq "OUI"}
+                        <p class="text-secondary text-center">Ce Cv a été accepté par {$cv->getDestination()}, vous ne pouvez plus le modifier</p>
+                        {else}
+                            <div class="modal-footer">
+                            <a class="text-secondary" style="font-size: 25px; cursor:pointer" data-toggle="modal" data-target="#mod{$cv->getId()}" data-toggle="tooltip" title="Modifier" id="link-edit-cv"><ion-icon name="reader-sharp"></ion-icon></a>  
+                            </div>
+                        {/if}
+                   
+                
+        </div>
+    </div>
+</div>
+{include file="src/view/candidat/editcv.html"}

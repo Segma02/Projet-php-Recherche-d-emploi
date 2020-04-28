@@ -1,0 +1,225 @@
+{extends file="src/view/templates/index.html"}
+
+{block name="menu"}
+<ul class="nav justify-content-center">
+    <li class="nav-item" data-toogle="tooltip" title="Acceuil">
+        <a href="{$url_base}Candidat/index" class="nav-link active text-secondary"><ion-icon name="home-sharp" id="home"></ion-icon></a>
+    </li>                   
+    <li class="nav-item">                 
+       <a href="{$url_base}Candidat/CV" class="nav-link text-secondary" data-toogle="tooltip" title="CV"><ion-icon name="reader-sharp" id="icon-cv"></ion-icon></a>
+    </li>
+    <li class="nav-item">
+        <a href="{$url_base}Candidat/Mesfavoris" class="nav-link text-secondary" data-toogle="tooltip" data-placement="top" title="Favoris"><ion-icon name="mail-sharp" id="mail"></ion-icon></a>
+    </li>
+    <li class="nav-item">
+        <a href="{$url_base}candidat/publication" class="nav-link text-secondary notif" data-toogle="tooltip"  title="Notifications"><ion-icon name="notifications-sharp" id="cloche"></ion-icon>{foreach from=$notif item=$count}<p class="badge badge-danger count">{if $count eq 0}{else}{$count}{/if}</p>{/foreach}</a>
+        
+    </li>
+    
+</ul>
+{/block}
+
+<!--Deconnexion-->
+{block name="login_out"}
+<form action="{$url_base}Candidat/Deconnexion" method="POST">
+    <button class="btn btn-secondary btn-sm rounded-circle mr-2" data-toogle="tooltip" title="login out" name="exit" value="quitter"><ion-icon name="exit"></ion-icon></button>
+</form>
+{/block}
+
+<!--Bar de navigation-->
+{block name="info"}
+<img src="{$url_base}public/image/candidat/{$smarty.session.image}" class="align-self-start mw-10" width="100" alt="">
+<div class="media-body mt-3 ml-2">
+        <p class="h5 text-secondary" style="text-decoration:underline"><strong>Votre profile <ion-icon name="person-sharp"></ion-icon></strong></p>
+        <p class=" text-start text-secondary"><ion-icon name="man-sharp"></ion-icon><strong> {$smarty.session.c_nom} {$smarty.session.prenom}</strong></p>
+        <p class=" text-start text-secondary"><ion-icon name="earth-sharp"></ion-icon><strong> {$smarty.session.pays}</strong></p>
+        <p class=" text-start text-secondary"><ion-icon name="at"></ion-icon><strong>  {$smarty.session.c_adresse}</strong></p>
+     
+</div>
+{/block}
+
+{block name="candidat"}
+<div class="carousel slide" data-ride="carousel" id="carousel-left">
+    <div class="carousel-inner">
+        <div class="carousel-item active" data-interval="10000">
+            <img src="{$url_base}public/image/img3.png" class="d-block" width="270" alt="image">
+        </div>
+        <div class="carousel-item" data-interval="10000">
+            <img src="{$url_base}public/image/img4.png" class="d-block" width="265" alt="image">
+        </div>
+    </div>
+</div>
+{/block}
+{block name="index"}
+<div class="container-fluid-lg">
+    <div class="navbar navbar-expand-md bg-dark d-md-block justify-content-between sticky-top d-lg-none" role="navigation">
+        <a href="{$url_base}Candidat/index" class="navbar-brand">
+            <img src="{$url_base}public/image/imgcool.png" class="d-block mx-auto" width="33px"alt="">
+            <span class="text-secondary" id="text-logo"><strong>Smarta</strong></span>
+        </a>
+        <ul class="nav justify-content-end">
+            <li class="nav-item "><a href="{$url_base}Candidat/index" class="nav-link active text-secondary" data-toogle="tooltip" data-placement="top" title="Acceuil"><ion-icon name="home-sharp" id="home"></ion-icon></a></li>                                
+            <li class="nav-item "><a href="{$url_base}Candidat/CV" class="nav-link text-secondary" data-toogle="tooltip" data-placement="top" title="CV"><ion-icon name="reader-sharp" id="globe"></ion-icon></a></li>                               
+            <li class="nav-item "><a href="{$url_base}Candidat/Mesfavoris" class="nav-link text-secondary" data-toogle="tooltip" data-placement="top" title="Favoris"><ion-icon name="mail-sharp" id="mail"></ion-icon></a></li>          
+            <li class="nav-item "><a href="{$url_base}candidat/publication" class="nav-link text-secondary" data-toogle="tooltip" data-placement="top" title="Publication"><ion-icon name="notifications-sharp" id="mail"></ion-icon></a></li>          
+            
+        </ul>
+    </div>    
+
+  
+    <div class="row justify-content-start">
+        <div class="col-md-9">
+            <div class="container-fluid">
+                <div class="content-header mt-3 align-items-start">
+                    <h1 class="text-secondary ml-2" data-aos="zoom-in-down" data-aos-duration="1000">Notifications 
+                        <span><img src="{$url_base}public/image/candidat/{$smarty.session.image}" class="d-md-block d-lg-none ml-0" width="20px" alt=""></span>
+                    </h1>
+                </div>
+            </div>
+            <div class="row justify-content-start mt-2  mb-5">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <input type="text" class="form-control btn-light ml-4" value="" id="search_offre" placeholder="Recherche d'offres">
+                    </div>
+                </div>
+            </div>  
+            <div class="row justify-content-start">
+                <div class="col-md-10" id="result_search"></div>
+            </div>
+            <div class="row justify-content-start" id="notification">
+                <div class="col-md-10">
+                    <div id="publication"> 
+                       
+                        {foreach from=$notif item=$count}
+                        {if $count neq 0}
+                        {foreach from=$rowcv item=$val}
+                        {foreach from=$offres item=$value} 
+                        {if $val eq 0}
+                        <div class="media mt-3 m-md-4 pr-3 shadow rounded" > 
+                            <img src="{$url_base}public/image/Entreprise/{$value->getImage()}"  class="align-self-start ml-3 mt-3" width="50px" alt="">
+                            
+                            <div class="media-body"> 
+                               <div class="row ml-2">
+                                    <div class="col-sm-12">           
+                                        <span class="text-dark ml-2" style="font-weight: bold;">{$value->getNom()}  
+                                        </span><br>
+                                        <span class="text-primary"  style="text-decoration: underline #5B24FF;">{$value->getAdresse()}</span>  
+                                           
+                                          <p class="text-secondary">{$value->getNom()} a publié une offre d'emploi êtes vous intéressé ? </p>
+                                    </div>
+                               </div> 
+                               <div class="row ml-2">
+                                    <div class="col-md-12">
+                                        <p class="text-secondary"><ion-icon name="calendar-sharp"></ion-icon> publié le {$value->getDate()}</p>
+                                        <span><a href="{$url_base}Candidat/CV?destinataire={$value->getNom()}" class="text-secondary" data-toogle="tooltip" data-placement="bottom" title="Répondre" style="font-size: 30px;"><ion-icon name="arrow-undo-outline"></ion-icon></a></span>
+                                        <span><a class="text-secondary ml-0" data-toggle="modal" type="button" data-target="#modal{$value->getId()}" data-toggle="tooltip" data-placement="bottom" title="Voir l'offre" style="font-size: 30px;"><ion-icon name="eye-sharp"></ion-icon></a></span>   
+                                    </div>
+                               </div>
+                               
+                            </div>
+                          
+                        </div>
+                        
+                         {include file="src/view/candidat/modalOffre.html"}
+                         {else}
+                         {if $val neq 0}
+                         {foreach from=$cv item=$var}
+                         <div class="media mt-5 m-sm-3 shadow"> 
+                            <img src="{$url_base}public/image/Entreprise/{$value->getImage()}" class="align-self-start ml-3 mt-3" width="50px" alt="">
+                            <div class="media-body"> 
+                               <div class="row ml-2">
+                                    <div class="col-sm-12">           
+                                        <span class="text-dark ml-0" style="font-weight: bold;">{$value->getNom()}  
+                                            {if $var->getDestination() eq $value->getNom() and $var->getAccepted() eq "OUI"}
+                                            <ion-icon class="text-success" style="font-size: 30px;" name="checkmark-done-sharp" id="valid{$value->getId()}"></ion-icon>
+                                            {else}
+                                            {if  $var->getDestination() eq $value->getNom() and $var->getAccepted() eq "NON"}
+                                            <ion-icon class="text-danger" style="font-size: 30px;" name="close-sharp" id="valid{$value->getId()}"></ion-icon>
+                                            {/if}
+                                            {/if}
+                                        </span><br>
+
+                                        <span class="text-primary"  style="text-decoration: underline #5B24FF;">{$value->getAdresse()}</span>
+                                            {if $var->getDestination() eq $value->getNom() and $var->getAccepted() eq "OUI"}
+                                            <p class="text-secondary" id="p1{$value->getId()}">{$value->getNom()} a accepté votre cv</p>
+                                            {elseif $var->getDestination() eq $value->getNom() and $var->getAccepted() eq "NON"}
+                                            <p class="text-secondary" id="p2{$value->getId()}">{$value->getNom()} a décliné votre demande</p>  
+                                            {elseif $var->getDestination() neq $value->getNom() and $var->getAccepted() eq "OUI"}
+                                            <div class="col-sm-10">
+                                                <p class="text-secondary text-justify" id="p3{$value->getId()}">{$smarty.session.prenom}, nous voulons vous signaler que vous êtes à présent préselectionné par {$var->getDestination()}, si voulez vous entrer en contact avec l'entreprise {$value->getNom()}, faites-le en dehors de cette plateforme, merci.</p>  
+                                            </div>
+                                            {else}
+                                            <p class="text-secondary" id="p4{$value->getId()}">{$value->getNom()} a publié une offre d'emploi êtes vous intéressé ? </p>
+                                            {/if}
+                                      
+                                    </div>
+                               </div> 
+                               <div class="row ml-2">
+                                    <div class="col-md-12">
+                                        <p class="text-secondary"><ion-icon name="calendar-sharp"></ion-icon> publié le {$value->getDate()}</p>
+                                        {if $var->getDestination() eq $value->getNom() and $var->getAccepted() eq "OUI"}
+                                        <span><a class="text-secondary ml-0" data-toggle="modal" type="button" data-target="#modal{$value->getId()}" data-toggle="tooltip" data-placement="bottom" title="Voir l'offre" style="font-size: 30px;"><ion-icon name="eye-sharp"></ion-icon></a></span>   
+                                        {elseif $var->getDestination() eq $value->getNom() and $var->getAccepted() eq "NON"}
+                                        <span><a class="text-secondary ml-0" data-toggle="modal" type="button" data-target="#modal{$value->getId()}" data-toggle="tooltip" data-placement="bottom" title="Voir l'offre" style="font-size: 30px;"><ion-icon name="eye-sharp"></ion-icon></a></span>   
+                                        {elseif $var->getDestination() neq $value->getNom() and $var->getAccepted() eq "OUI"}
+                                        <span><a class="text-secondary ml-0" data-toggle="modal" type="button" data-target="#modal{$value->getId()}" data-toggle="tooltip" data-placement="bottom" title="Voir l'offre" style="font-size: 30px;"><ion-icon name="eye-sharp"></ion-icon></a></span>   
+                                        {elseif $var->getDestination() neq  $value->getNom() and $var->getAccepted() eq "-"}
+                                            <span><a href="{$url_base}Candidat/CV?destinataire={$value->getNom()}" class="text-secondary" data-toogle="tooltip" data-placement="bottom" title="Répondre" style="font-size: 30px;" id="link-reply"><ion-icon name="arrow-undo-outline"></ion-icon></a></span>
+                                            <span><a class="text-secondary ml-0" data-toggle="modal" type="button" data-target="#modal{$value->getId()}" data-toggle="tooltip" data-placement="bottom" title="Voir l'offre" style="font-size: 30px;"><ion-icon name="eye-sharp"></ion-icon></a></span>   
+                                        {else}
+                                        <span><a href="{$url_base}Candidat/CV?destinataire={$value->getNom()}" class="text-secondary" data-toogle="tooltip" data-placement="bottom" title="Répondre" style="font-size: 30px;"><ion-icon name="arrow-undo-outline"></ion-icon></a></span>
+                                        <span><a class="text-secondary ml-0" data-toggle="modal" type="button" data-target="#modal{$value->getId()}" data-toggle="tooltip" data-placement="bottom" title="Voir l'offre" style="font-size: 30px;"><ion-icon name="eye-sharp"></ion-icon></a></span>   
+                                        {/if}
+                                    </div>
+                               </div>
+                            </div>
+                            {if $var->getDestination() eq $value->getNom() and $var->getAccepted() eq "OUI"}
+
+                            {elseif $var->getDestination() eq $value->getNom() and $var->getAccepted() eq "NON"}
+                             
+                            {else}
+                            <button class="btn btn-light btn-sm mt-4 mr-2 addF" type="button" value="{$value->getId()}"><ion-icon name="push-sharp"></ion-icon></button>
+                            {/if}
+                         </div>
+                         {include file="src/view/candidat/modalOffre.html"}
+                         {/foreach}
+                         {/if}
+                         {/if}
+                     {/foreach}    
+                    {/foreach} 
+                    {else}
+                        <div class="col-lg-12 mb-5" style="margin-top:25%;" data-aos="zoom-in-down" data-aos-duration="2000">
+                         <h1 class="text-secondary text-center"><strong>Notification non disponible <ion-icon name="notifications-off-sharp"></ion-icon></strong></h1>
+                         <p class="text-secondary text-center" style="font-weight: bolder;">Aucune offre pour le moment.</p>
+                        </div>
+                    {/if}
+                    {/foreach}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{/block}
+{block name="logos"}
+<ul class="list-inline">
+    <li class="list-inline-item">
+        <img src="{$url_base}public/image/logo2.png" width="200" alt="">
+    </li>
+    <li class="list-inline-item">
+        <img src="{$url_base}public/image/logo3.png" width="200" alt="">
+    </li>
+    <li class="list-inline-item">
+        <img src="{$url_base}public/image/logo4.png" width="200" alt="">
+    </li>
+    <li class="list-inline-item">
+        <img src="{$url_base}public/image/login6.png" width="200" alt="">
+    </li>
+</ul>
+{/block}
+
+{block name="logo-link"}
+<a href="{$url_base}Candidat/index">
+    <img src="{$url_base}public/image/imgcool.png" data-toogle="tooltip" title="Acceuil" class="d-block mx-auto" width="90px" alt="logo">
+</a>
+{/block}

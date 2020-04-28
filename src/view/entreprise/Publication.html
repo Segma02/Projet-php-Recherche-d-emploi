@@ -1,0 +1,157 @@
+{extends file="src/view/templates/index.html"}
+
+<!--Partie Offre Entreprise-->
+
+{block name="menu"}
+<ul class="nav justify-content-center">
+    <li class="nav-item" data-toogle="tooltip" title="Acceuil">
+        <a href="{$url_base}Entreprise/index" class="nav-link active text-secondary"><ion-icon name="home-outline" id="home"></ion-icon></a>
+    </li>                   
+    <li class="nav-item">                 
+       <a href="{$url_base}Entreprise/Offre" class="nav-link text-secondary" data-toogle="tooltip" title="Les offres"><ion-icon name="earth-outline" id="globe"></ion-icon></a>
+    </li>
+    <li class="nav-item">
+        <a href="{$url_base}Entreprise/CVthèque" class="nav-link text-secondary" data-toogle="tooltip" data-placement="top" title="CVthèque"><ion-icon name="newspaper-outline" id="mail"></ion-icon></a>
+    </li>
+    <li class="nav-item">
+        <a href="{$url_base}Entreprise/Publication" class="nav-link text-secondary" data-toogle="tooltip"  title="Notifications"><ion-icon name="notifications-outline" id="cloche"></ion-icon>{foreach from=$notif item=$count}<p class="badge badge-danger">{if $count eq 0}{else}{$count}{/if}</p>{/foreach}</a>
+    </li>
+    
+</ul>
+{/block}
+
+{block name="info"}
+<img src="{$url_base}public/image/entreprise/{$entreprise->getImage()}" class="align-self-start mt-3" width="120px" alt="">
+<div class="media-body mt-3 ml-2">
+        <p class="h5 text-secondary" style="text-decoration:underline"><strong>Votre profile <ion-icon name="business-sharp"></ion-icon></strong></p>
+        <p class=" text-start text-secondary"><ion-icon name="business-sharp"></ion-icon><strong> {$smarty.session.nom}</strong></p>
+        <p class=" text-start text-secondary"><ion-icon name="earth-sharp"></ion-icon><strong> {$entreprise->getPays()}</strong></p>
+        <p class=" text-start text-secondary"><ion-icon name="shield-sharp"></ion-icon><strong>{$entreprise->getStatut()}</strong></p>
+     
+</div>
+{/block}
+{block name="entreprise"}
+<img src="{$url_base}public/image/imgleft.png" width="350px;" class="d-block" alt="image">
+{/block}
+
+
+<!--Deconnexion-->
+{block name="login_out"}
+<form action="{$url_base}Entreprise/Deconnexion" method="POST">
+    <button class="btn btn-secondary btn-sm rounded-circle" data-toogle="tooltip" title="login out" name="exit" value="deconnexion"><ion-icon name="exit"></ion-icon></button>
+</form>
+{/block}
+
+{block name="index"}
+<div class="container-fluid-lg">
+    <div class="navbar navbar-expand-lg bg-dark d-md-block justify-content-between sticky-top d-lg-none" role="navigation">
+        <a href="{$url_base}Entreprise/index" class="navbar-brand">
+            <img src="{$url_base}public/image/imgcool.png" class="d-block mx-auto" width="33px"alt="">
+            <span class="text-secondary" id="text-logo"><strong>Smarta</strong></span>
+        </a>
+        <ul class="nav justify-content-end">
+            <li class="nav-item "><a href="{$url_base}Entreprise/index" class="nav-link active text-secondary"><ion-icon name="home-sharp" id="home"></ion-icon></a></li>                                
+            <li class="nav-item "><a href="{$url_base}Entreprise/CV" class="nav-link text-secondary"><ion-icon name="reader-sharp" id="globe"></ion-icon></a></li>                               
+            <li class="nav-item "><a href="{$url_base}Entreprise/CVthèque" class="nav-link text-secondary"><ion-icon name="mail-sharp" id="mail"></ion-icon></a></li>          
+            <li class="nav-item "><a href="{$url_base}Entreprise/Publication" class="nav-link text-secondary"><ion-icon name="notifications-sharp" id="mail"></ion-icon></a></li>          
+            
+        </ul>
+    </div>
+
+    <div class="row justify-content-start">
+        <div class="col-md-10">
+            {foreach from=$notif item=$count}
+            {if $count neq 0}
+            <div class="container">
+                <div class="content-header mt-3">
+                    <h1 class="text-secondary" data-aos="zoom-in-down" data-aos-duration="1000">Notifications 
+                        <span><img src="{$url_base}public/image/entreprise/{$entreprise->getImage()}" class="rounded-circle  d-md-block d-lg-none ml-0" width="40px" alt=""></span>
+                    </h1>
+                </div>
+            </div>
+            <div class="row justify-conten-tstart mt-2  mb-5">
+                <div class="col-sm-7">
+                    <div class="form-group">
+                        <input type="text" class="btn-light form-control" placeholder="rechercher plus de candidats" id="search-candidats">
+                    </div>
+                </div>
+            </div>  
+            <div class="row justify-content-start mt-2">
+                <div class="col-md-8" id="result-candidats">
+
+                </div>
+            </div>
+            <div class="row justify-content-start" id="candidats-notifications">
+                <div class="col-md-10">
+                    <div id="publication">
+                        {foreach from=$cv item=$value}
+                        <div class="media mt-3 m-md-1 pr-3 shadow">
+                            <img src="{$url_base}public/image/candidat/{$value->getPhoto()}" class="align-self-start" width="50px"  alt="">
+                            <div class="media-body">
+                               <div class="row ml-2">
+                                    <div class="col-sm-12">              
+                                        <span class="text-dark" style="font-weight: bold;">{$value->getNom()} {$value->getPrenom()}
+                                             {if $value->getAccepted() == "OUI"}
+                                             <ion-icon class="text-success" style="font-size: 30px;" name="checkmark-done-sharp"></ion-icon>
+                                            {elseif $value->getAccepted() == "NON"}
+                                            <ion-icon class="text-danger" style="font-size: 30px;" name="close-sharp"></ion-icon>{/if}</span><br>
+                                        <span class="text-primary"  style="text-decoration: underline #5B24FF;">{$value->getAdresse()}</span>
+                                        {if $value->getAccepted() eq "OUI"}
+                                        <p class="text-secondary">Vous avez accepté ce candidat</p>
+                                        {elseif $value->getAccepted() eq "NON"}
+                                        <p class="text-secondary">Vous avez rejeté la demande de ce candidat </p>
+                                        {else}
+                                        <p class="text-secondary">{$value->getNom()} {$value->getPrenom()} a répondu à votre demande.</p>
+                                        {/if}
+                                    </div>
+                               </div> 
+                               <div class="row ml-2">
+                                    <div class="col-md-12">
+                                        <p class="text-secondary"><ion-icon name="calendar-sharp"></ion-icon> publié le {$value->getDate()}</p>
+                                        <span><a class="text-secondary ml-0" data-toggle="modal" data-target="#modal{$value->getId()}" data-toggle="tooltip" data-placement="bottom" title="Voir l'offre" style="font-size: 30px;"><ion-icon name="reader-sharp"></ion-icon></a></span>   
+                                    </div>
+                               </div>
+                            </div>
+                        </div>
+                        {include file="src/view/entreprise/modalCv.html"}
+                        {/foreach}
+                    </div>
+                </div>
+            </div>
+            {else}
+                <div class="row" id="page">
+                    <div class="col-md-12" style="margin-top:25%;" data-aos="zoom-in-down" data-aos-duration="2000">
+                     <h1 class="text-secondary text-center"><strong>Notification non disponible <ion-icon name="notifications-off-sharp"></ion-icon></strong></h1>
+                     <p class="text-secondary text-center" style="font-weight: bolder;">Aucun candidat n'a effectué une demande d'emploi</p>
+                    </div>
+                </div>
+            {/if}
+            {/foreach}
+        </div>
+    </div>
+</div>
+
+{/block}
+
+{block name="logos"}
+<ul class="list-inline">
+    <li class="list-inline-item">
+        <img src="{$url_base}public/image/logo2.png" width="200" alt="">
+    </li>
+    <li class="list-inline-item">
+        <img src="{$url_base}public/image/logo3.png" width="200" alt="">
+    </li>
+    <li class="list-inline-item">
+        <img src="{$url_base}public/image/logo4.png" width="200" alt="">
+    </li>
+    <li class="list-inline-item">
+        <img src="{$url_base}public/image/login6.png" width="200" alt="">
+    </li>
+</ul>
+{/block}
+
+{block name="logo-link"}
+<a href="{$url_base}Candidat/index">
+    <img src="{$url_base}public/image/imgcool.png" data-toogle="tooltip" title="Acceuil" class="d-block mx-auto" width="90px" alt="logo">
+</a>
+{/block}

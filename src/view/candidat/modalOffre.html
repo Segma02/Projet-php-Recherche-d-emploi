@@ -1,0 +1,47 @@
+<div class="modal fade" id="modal{$value->getId()}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content" style="background-color: #F5F5F5;">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">
+              <img src="{$url_base}public/image/Entreprise/{$value->getImage()}" width="50px">
+              <span>{$value->getNom()}</span>
+        </h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <div class="row ml-2">
+                <div class="col-md-12">
+                    <span  class="text-secondary" style="font-family:calibri; font-size:30px;">Respensable de {$value->getDepartement()}</span>
+                </div>
+            </div>
+            <div class="row justify-content-start ml-2">
+                <div class="col-sm-0">
+                    <span class="text-secondary"><ion-icon name="location"></ion-icon> {$value->getlieu()}</span>
+                </div>
+                <div class="col-sm-0 ml-1">
+                    <span class="text-secondary"><ion-icon name="reader-outline"></ion-icon> {$value->getContrat()}</span>
+                </div>
+            </div>
+            <p class="text-secondary ml-2 mt-5" style="font-size:25px;" id="poste">Poste</p>
+            <div class="form-row justify-content-start ml-2">
+                <div class="col-md-10">
+                   <p class="text-secondary">
+                       {$value->getPoste()}
+                   </p>
+                </div>
+            </div>
+            <p class="text-info"><ion-icon name="at"></ion-icon>{$value->getAdresse()}</p>
+                
+            <div class="row justify-content-start ml-2 mt-5 d-block">
+                <div class="col-md-5" id="col-signature">
+                    <h2 class="text-secondary">Signature</h2>
+                    <img src="{$url_base}public/image/signature.png" width="120px;" alt="signature">
+                </div>
+            </div>
+
+        </div>
+      </div>
+    </div>
+  </div>

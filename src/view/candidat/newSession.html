@@ -1,0 +1,32 @@
+{extends file="src/view/templates/connexion.html"}
+
+{block name="txt"}
+Faites vous recruter par les meilleures startups
+{/block}
+
+{block name="profile"}
+<div class="row justify-content-center">
+    <img src="{$url_base}public/image/candidat/avaatar.png" class="rounded" width="65" alt="new session avatar">
+</div>
+{/block}
+
+{block name="formulaire"}
+<form action="{$url_base}Candidat/Connected" class="form-group" method="post">
+    <div class="form-row justify-content-center">
+        <div class="col-sm-8">
+            <input type="text" name="adresse" id="adr2-candidat" class="form-control btn-light mt-2" placeholder="Entrer votre adresse électronique" value="{if isset($adresse)}{$adresse}{/if}">
+           <div id="validation">
+            {if isset($erreur)}{$erreur}{/if}
+           </div>
+        </div>
+    </div>
+    <div class="row justify-content-center mt-5">
+        <div class="col-sm-6">
+            <button class="btn btn-block mt-2 text-light" id="c_btn-start" name="newSession" value="getIt">Commencer</button>
+        </div>
+    </div>
+</form>
+<div class="row justify-content-center mt-3">
+    <a class="btn btn-light text-muted" href="{$url_base}Candidat/connexion?Ma_session={$smarty.session.c_nom}{$smarty.session.prenom}" data-toggle="tooltip" title="{$smarty.session.c_nom} {$smarty.session.prenom}"><img src="{$url_base}public/image/candidat/{$smarty.session.image}" width="25" alt="image session"></a>
+</div>
+{/block}

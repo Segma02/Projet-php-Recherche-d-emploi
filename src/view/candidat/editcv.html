@@ -1,0 +1,57 @@
+<div class="modal fade" id="mod{$cv->getId()}" tabindex="-1" role="dialog" aria-labelledby="icon" aria-hidden="true">
+  
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                
+                <h4 class="text-secondary"><ion-icon name="reader-sharp" id="icon"></ion-icon></h4>
+               
+                <button class="close" aria-label="closecv" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+            </div>
+                <div class="modal-body">
+                    <form id="form_cv_edit" class="form-input">
+                        <div>
+                            <div>
+                                <img src="{$url_base}public/image/candidat/{$cv->getPhoto()}" width="50" alt="">
+                            </div>
+                            <ion-icon name="person" class="text-secondary"></ion-icon> <input class="bg-default" id="e_profession{$cv->getId()}" placeholder="Profession" style="border: none;" value="{$cv->getProfession()}" name="profession">
+                            <p class="text-secondary mt-3" style="text-decoration: underline #616771;"><strong>Infos:</strong></p>
+                            <ion-icon name="call-sharp"  class="text-secondary"></ion-icon> <input class="bg-default" id="e_tel{$cv->getId()}" placeholder="Téléphone" style="border: none;" value="{$cv->getTel()}" name="mobile">
+                            <p class="text-secondary mt-1"><ion-icon name="at"></ion-icon> {$cv->getAdresse()}</p>
+                            <p class="text-secondary mt-1"><ion-icon name="home-sharp"></ion-icon> {$cv->getLieu()}</p>
+                        </div>
+                        <div class="row justify-content-start">
+                            <div class="col-sm-6">
+                                <div class="sections">
+                                    <p><strong>Compétences</strong></p>
+                                </div>
+                                <input class="bg-default mb-2" id="e_cmp{$cv->getId()}" placeholder="Compétence" style="border: none;" value="{$cv->getCompetence()}" name="competence">
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="sections">
+                                    <p><strong>Langues</strong></p>
+                                </div>
+                                <input class="bg-default mb-2" id="e_langue{$cv->getId()}" placeholder="Langue" style="border: none;" value="{$cv->getLangages()}" name="langue">
+                            </div>
+                        </div>
+                        <div class="row justify-content-start">
+                            <div class="col-sm-6">
+                                <div class="sections">
+                                    <p><strong>Projets</strong></p>
+                                </div>
+                                <textarea   rows="3" cols="27" id="e_projet{$cv->getId()}" class="bg-default" placeholder="Projet" style="border: none;" value="{$cv->getProjet()}" name="projet"></textarea>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="sections">
+                                    <p><strong>Experiences</strong></p>
+                                </div>
+                                <textarea rows="3" cols="27" id="e_experience{$cv->getId()}" class="bg-default" placeholder="Experience" style="border: none;" value="{$cv->getExperience()}" name="Experience"></textarea>
+                            </div>
+                        </div>
+                        
+                        <button class="btn btn-md btn-outline-secondary edit_cv" type="button" value="{$cv->getId()}">Confirner</button>
+                    </form>
+                </div>
+        </div>
+    </div>
+</div>

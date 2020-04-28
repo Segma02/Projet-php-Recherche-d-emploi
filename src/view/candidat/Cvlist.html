@@ -1,0 +1,63 @@
+       <div class="container">
+           
+        <div class="row justify-content-center mb-5" id="mescv">
+            {foreach from=$row item=$value}
+            {if $value neq 0}
+            <div class="col-md-9" id="publication">
+                {foreach from=$mescv item=$cv}
+                <div class="card shadow mt-4" id="dislaycv">
+                    <div class="card-body">
+                        <div>
+                            <div>
+                                <img src="{$url_base}public/image/candidat/{$cv->getPhoto()}" width="30">
+                                <span class="text-secondary"><strong> Vous</strong></span>
+                            </div>
+                            <hr class="my-1">
+                        </div>
+                        {if $cv->getDestination() neq "Public" and $cv->getAccepted() !="OUI"}
+                        <p class="text-secondary"><strong>Type de publication</strong> <ion-icon name="business" style="font-size: 25px;"></ion-icon></p> 
+                         <div class="alert alert-secondary">
+                            <p class="text-secondary"><strong style="font-family: 'Alex Brush', cursive; font-size: 25px; text-decoration: underline grey;">Smarta <img src="{$url_base}public/image/imgcool.png" width="20"></strong> message</p>
+                            <p class="text-secondary"><strong>{$cv->getPrenom()}</strong>, vous avez répondu à la publication de {$cv->getDestination()}, 
+                             vous pouvez consulter votre poste, et apporter des modifications si possible.
+                            </p>
+                         </div>
+                         {elseif $cv->getDestination() neq "Public" and $cv->getAccepted() =="OUI"}
+                            <p class="text-secondary"><strong>Type de publication</strong> <ion-icon name="business" style="font-size: 25px;"></ion-icon></p> 
+                            <div class="alert alert-secondary">
+                                <p class="text-secondary"><strong style="font-family: 'Alex Brush', cursive; font-size: 25px; text-decoration: underline grey;">Smarta <img src="{$url_base}public/image/imgcool.png" width="20"></strong> message</p>
+                                <p class="text-secondary"><strong>{$cv->getPrenom()}</strong>, votre cv a été préselectionné par l'entreprise {$cv->getDestination()}.
+                                </p>
+                            </div>
+                        {else}
+                         <p class="text-secondary"><strong>Type de publication</strong> <ion-icon name="earth" style="font-size: 25px;"></ion-icon></p>
+                         <p class="text-secondary"><strong>Statut:{$cv->getDestination()}</strong></p>
+                         <div class="alert alert-secondary">
+                            <p class="text-secondary"><strong style="font-family: 'Alex Brush', cursive; font-size: 25px; text-decoration: underline grey;">Smarta <img src="{$url_base}public/image/imgcool.png" width="20"></strong> message</p>
+                            <p class="text-secondary"><strong>{$cv->getPrenom()}</strong>, votre demande d'emploi a été effectué avec succès, 
+                             vous pouvez consulter votre poste, et apporter des modifications si possible.
+                            </p>
+                         </div>
+                        {/if}
+                        <div class="row justify-content-start">
+                            <a class="text-secondary ml-3" data-toggle="modal" type="button" data-target="#modal{$cv->getId()}" data-toggle="tootltip" title="voir"><ion-icon name="eye-sharp"></ion-icon></a>
+                        </div>
+                    </div>
+                    {include file="src/view/candidat/voircv.html"}
+                </div>
+               
+               {/foreach}
+            </div>
+            {else}
+                <div class="row justify-content-center">
+                    <div class="col-md-12">
+                        <h1 class="text-secondary text-center"><strong>CV non disponibles  <ion-icon name="reader-sharp"></ion-icon></strong></h1>
+                       <p class="text-secondary text-center">Vous n'avez pas encore rédigé de CV.</p>
+                     </div>
+                </div> 
+            {/if}
+            {/foreach}
+        </div> 
+       </div>  
+      
+   

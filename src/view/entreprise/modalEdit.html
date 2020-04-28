@@ -1,0 +1,44 @@
+<div class="modal fade" tabindex="-1" id="modal{$offre->getId()}" role="dialog" aria-label="modaledit" aria-labelledby="title" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header" aria-label="title">
+                <h1 class="text-secondary"><ion-icon name="reader-sharp"></ion-icon></h1>
+                <button class="close" data-dismiss="modal" aria-label="Justclose"><span aria-hidden="true">&times;</span></button>
+            </div>
+                <form id="edit_formOffre" method="POST">
+                    <div class="modal-body bg-light">
+                        <div class="row ml-2">
+                            <div class="col-md-12">
+                                <span  class="text-secondary" style="font-family:calibri; font-size:25px;">Respensable de: </span>
+                                <input type="text" name="departement"  id="edit_departement{$offre->getId()}" class="bg-light" style="border: none;" placeholder="Exemple Departement">
+                            </div>
+                        </div>
+                        <div class="row justify-content-start ml-2">
+                            <div class="col-sm-0">
+                               <span class="text-secondary"><ion-icon name="location"></ion-icon> {$entreprise->getPays()}</span>
+                            </div>
+                            <div class="col-sm-0 ml-1">
+                                <span class="text-secondary"><ion-icon name="reader-outline"></ion-icon><input type="text" name="contrat" class="bg-light" style="border: none;"  placeholder="contrat" id="edit_contrat{$offre->getId()}"></span>
+                            </div>
+                        </div>
+                        <p class="text-secondary ml-2 mt-5" style="font-size:25px;" id="poste">Poste</p>
+                        <div class="form-row justify-content-start ml-2">
+                            <div class="col-md-10">
+                                <textarea name="poste" minlength="30" maxlength="200" id="edit_poste-text{$offre->getId()}" class="bg-light" style="border: none;" cols="40" rows="6" placeholder="Ecrivez quelque chose"></textarea>
+                            </div>
+                        </div>
+                        <div class="row justify-content-start ml-2 mt-0 d-block">
+                            <div class="col-md-5" id="col-signature">
+                                <h2 class="text-secondary">Signature</h2>
+                                <img src="{$url_base}public/image/signature.png" width="120px;" alt="signature">
+                            </div>
+                        </div>
+                      
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-success btn-md editoffre" name="editer" value="{$offre->getId()}" type="button">Confirner</button>
+                    </div>
+                </form>
+        </div>
+    </div>
+</div>

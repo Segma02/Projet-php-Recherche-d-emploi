@@ -1,0 +1,72 @@
+
+<div class="modal fade" id="modal{$value->getId()}" tabindex="-1" role="dialog" aria-labelledby="modaltitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-secondary" id="modaltitle">
+                    <img src="{$url_base}public/image/candidat/{$value->getPhoto()}" width="50px"  alt="">
+                    {$value->getNom()} {$value->getPrenom()}  {if $value->getAccepted() eq "OUI"} <ion-icon class="text-success" style="font-size: 40px;" name="checkmark-done-sharp"></ion-icon>
+                    {elseif $value->getAccepted() eq "NON"} 
+                    <ion-icon class="text-danger" style="font-size: 40px;" name="close-sharp"></ion-icon>
+                    {else}<ion-icon name="ellipsis-horizontal-circle"></ion-icon>{/if}
+                </h5>
+                <button class="close" data-dismiss="modal" aria-label="close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <strong class="text-secondary"><ion-icon name="person"></ion-icon> {$value->getProfession()}</strong>
+                    <p class="text-secondary mt-3" style="text-decoration: underline #616771;"><strong>Contact:</strong></p>
+                    <p class="text-secondary mt-1"><ion-icon name="call-sharp"></ion-icon> {$value->getTel()}</p>
+                    <p class="text-secondary mt-1"><ion-icon name="at"></ion-icon> {$value->getAdresse()}</p>
+                    <p class="text-secondary mt-1"><ion-icon name="home-sharp"></ion-icon> {$value->getLieu()}</p>
+                </div>
+                <div class="row justify-content-start">
+                    <div class="col-sm-6">
+                        <div class="sections">
+                            <p><strong>Compétences</strong></p>
+                        </div>
+                        <p>{$value->getCompetence()}</p>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="sections">
+                            <p><strong>Langues</strong></p>
+                        </div>
+                        <p>{$value->getLangages()}</p>
+                    </div>
+                </div>
+                <div class="row justify-content-start">
+                    <div class="col-sm-6">
+                        <div class="sections">
+                            <p><strong>Projets</strong></p>
+                        </div>
+                        <p>{$value->getProjet()}</p>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="sections">
+                            <p><strong>Experiences</strong></p>
+                        </div>
+                        <p>{$value->getExperience()}</p>
+                    </div>
+                </div>
+            </div>
+            <!--Si le candidat est accepté on accepte plus la demande pour la 2e fois-->
+
+            {if $value->getAccepted() eq "OUI"}
+                <p class="text-secondary mt-4 text-center">candidat(e) recruté(e) <ion-icon name="person-add-sharp"></ion-icon></p>
+            {elseif $value->getAccepted() eq "NON"}
+            <p class="text-secondary mt-4 text-center">candidat(e) non recruté(e) <ion-icon name="person-remove-sharp"></ion-icon></p>
+            {else}
+            <div class="modal-footer">
+                <form class="form-inline" action="{$url_base}Entreprise/Validation" method="POST">
+                    <div class="row">
+                        <!--On récupère l'Id de Cv par le button -->
+                        <button class="btn btn-success btn-md text-white mr-4" type="submit" name="recruter" value="{$value->getId()}">Recruter<ion-icon name="checkmark-circle"></ion-icon></button>
+                        <button class="btn btn-danger btn-md text-white mr-3" type="submit" name="rejeter" id="btn_rejet" value="{$value->getId()}">Rejeter<ion-icon name="close-circle"></ion-icon></button>
+                    
+                    </div>
+                </form>
+            </div>
+           {/if}
+        </div>
+    </div>
+</div>

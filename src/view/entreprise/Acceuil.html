@@ -1,0 +1,294 @@
+{extends file="src/view/templates/index.html"}
+
+<!--Partie Acceuil Entreprise-->
+
+{block name="menu"}
+<ul class="nav justify-content-center">
+    <li class="nav-item" data-toogle="tooltip" title="Acceuil">
+        <a href="{$url_base}Entreprise/index" class="nav-link active text-secondary"><ion-icon name="home-outline" id="home"></ion-icon></a>
+    </li>                   
+    <li class="nav-item">                 
+       <a href="{$url_base}Entreprise/Offre" class="nav-link text-secondary" data-toogle="tooltip" title="Les offres"><ion-icon name="earth-outline" id="globe"></ion-icon></a>
+    </li>
+    <li class="nav-item">
+        <a href="{$url_base}Entreprise/CVthèque" class="nav-link text-secondary" data-toogle="tooltip" data-placement="top" title="CVthèque"><ion-icon name="newspaper-outline" id="mail"></ion-icon></a>
+    </li>
+    <li class="nav-item">
+        <a href="{$url_base}Entreprise/Publication" class="nav-link text-secondary" data-toogle="tooltip"  title="Notifications"><ion-icon name="notifications-outline" id="cloche"></ion-icon>{foreach from=$notif item=$count}<p class="badge badge-danger">{if $count eq 0}{else}{$count}{/if}</p>{/foreach}</a>
+    </li>
+    
+</ul>
+{/block}
+{block name="info"}
+<img src="{$url_base}public/image/entreprise/{$entreprise->getImage()}" class="align-self-start mt-3" width="120px" alt="">
+<div class="media-body mt-3 ml-2">
+        <p class="h5 text-secondary" style="text-decoration:underline"><strong>Votre profile <ion-icon name="business-sharp"></ion-icon></strong></p>
+        <p class=" text-start text-secondary"><ion-icon name="business-sharp"></ion-icon><strong> {$smarty.session.nom}</strong></p>
+        <p class=" text-start text-secondary"><ion-icon name="earth-sharp"></ion-icon><strong> {$entreprise->getPays()}</strong></p>
+        <p class=" text-start text-secondary"><ion-icon name="shield-sharp"></ion-icon><strong> {$entreprise->getStatut()}</strong></p>
+      
+</div>
+{/block}
+
+
+<!--Implémentation btn login out-->
+{block name="login_out"}
+
+        <form action="{$url_base}Entreprise/Deconnexion" method="POST">
+            <button class="btn btn-secondary btn-sm rounded-circle" data-toogle="tooltip" title="login out" name="exit" value="deconnexion"><ion-icon name="exit"></ion-icon></button>
+        </form>
+{/block}
+
+
+{block name="index"}     
+    <div class="container-fluid sticky-top" id="container-lg">
+        <div class="navbar navbar-expand-lg bg-dark d-md-block justify-content-between sticky-top d-lg-none" role="navigation">
+            <a href="{$url_base}Entreprise/index" class="navbar-brand">
+                <img src="{$url_base}public/image/imgcool.png" class="d-block mx-auto" width="33px"alt="">
+                <span class="text-secondary" id="text-logo"><strong>Smarta</strong></span>
+            </a>
+            <ul class="nav justify-content-end">
+                <li class="nav-item "><a href="{$url_base}Entreprise/index"  class="nav-link active text-secondary"><ion-icon name="home-outline" id="home"></ion-icon></a></li>                                
+                <li class="nav-item "><a href="{$url_base}Entreprise/Offre" class="nav-link text-secondary"><ion-icon name="earth-sharp" id="globe"></ion-icon></a></li>                               
+                <li class="nav-item "><a href="{$url_base}Entreprise/CVthèque" class="nav-link text-secondary"><ion-icon name="mail-sharp" id="mail"></ion-icon></a></li>          
+                <li class="nav-item "><a href="{$url_base}Entreprise/Publication" class="nav-link text-secondary"><ion-icon name="notifications-sharp" id="mail"></ion-icon></a></li>          
+                
+            </ul>
+        </div>
+        <div class="navbar navbar-expand-md bg-dark">
+            <a href="https://www.who.int/fr/emergencies/diseases/novel-coronavirus-2019" class="navbar-brand">
+                <img src="{$url_base}public/image/who-logo.png"  class="d-block" width="150px" alt="organisation mondiale de la santé">
+            </a>
+            <p id="text-covid">Luttons tous contre le COVID-19</p>
+            <img src="{$url_base}public/image/image.gif.6a46fb16fc8b4c1cf98af1f0ec6e661f.gif" class="rounded ml-2" width="60px" alt="stop covid">
+        </div> 
+
+        <div class="row justify-content-center mt-4">
+            <div class="col-sm-7">
+                <div class="form-group">
+                    <input type="text" class="form-control btn-light" placeholder="rechercher profession" id="search_public">
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-8" id="result-public"></div>
+        </div>
+          <div id="row-home">
+            <div class="row rows-col-3 justify-content-center mt-5">
+                <div class="row d-none d-md-block d-lg-none" id="axe3">
+                    <div class="col-sm-5" id="deconnexion">
+                        <form  action="{$url_base}Welcome/index">
+                            <button type="submit" class="btn btn-secondary text-white btn-lg rounded-circle" data-toogle="tooltip" title="déconnexion"><ion-icon name="exit"></ion-icon></button>
+                        </form>
+                    </div>
+                </div>
+        <div class="row justify-content-center">    
+            <div class="col-sm-3  d-sm-none d-lg-block" data-aos="fade-right" data-aos-duration="3000">
+                <div class="container" id="apropos">
+                            <p class="text-center text-secondary"><strong>Pourquoi Smarta</strong></p>
+                        <div class="row mt-3 justify-content-center">
+                           <div class="container">
+                               <div class="row justify-content-center">
+                                   <img src="{$url_base}public/image/search.svg" width="25%" alt="loupe">
+                               </div>
+                               <p class="text-center text-secondary"><Strong>Trouvez les meilleurs candidats</Strong></p>
+                                   <p class="text-center" id="text-card">
+                                       Parmi les milliers de nouvelle candidature publiées chaque mois sur Smarta ! 
+                                   </p>
+                           </div>                                              
+                        </div>                                       
+                </div>
+           </div> 
+                <div class="col-sm-3  d-sm-none d-lg-block" data-aos="fade-right" data-aos-duration="2000">
+                    <div class="container" id="apropos">                                    
+                              <p class="text-secondary text-center"><strong>Offer bar</strong></p>
+                                <div class="row justify-content-center mt-3">
+                                    <div class="container">
+                                        <div class="row justify-content-center">
+                                            <img src="{$url_base}public/image/bar.svg" width="25%" alt="chart">
+                                        </div>
+                                        <p class="text-center text-secondary"><strong>Verifiez le nombre de personnes atteintes</strong></p>
+                                            <p class="text-center" id="text-card">
+                                                Grâce à cette option vous pouvez contrôler le nombre de personnes que vous atteignez.            
+                                            </p>
+                                    </div>            
+                                </div> 
+                    </div>
+                </div>
+                <div class="col-sm-3  d-sm-none d-lg-block" data-aos="fade-right" data-aos-duration="1000">
+                    <div class="container" id="apropos">
+                        <p class="text-secondary text-center"><strong>Analyse</strong></p>
+                        <div class="row justify-content-center">
+                            <div class="container">
+                                <div class="row justify-content-center">
+                                    <img src="{$url_base}public/image/analyse.svg" width="25%" alt="analyse">
+                                </div>
+                            </div>
+                            <p class="text-center text-secondary"><strong>Analyser chaque potentiel</strong></p>
+                            <p class="text-center" id="text-card">
+                                chaque candidat vous enverra un cv, à vous de juger leur compétence, soyez indulgent sur certains points lors de vos analyses.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>    
+        </div>    
+    <div class="row justify-content-center mb-5">
+        <div class="col-sm-0">
+            <ion-icon name="arrow-down-circle" id="continuer"></ion-icon>
+        </div>
+    </div>
+    <div class="row justify-content-center" id="corps-acceuil">
+            <p class="text-center text-secondary mb-5" id="titre1">QUELQUES CONSEILS SUR LE RECRUTEMENT  <ion-icon name="bulb-outline" id="blub"></ion-icon></p>
+    </div>
+    <div class="row justify-content-center">
+        <div class="row justify-content-center">
+            <div class="col-md-5" data-aos="zoom-in-down" data-aos-duration="2000">
+                <div class="container" id="c1">
+                    <h4 class="text-center text-white" id="sous-titre"><strong>5 conseils pour un entretien et recrutement reussi</strong></h4>
+                    <p class="text-center" id="sous-titre1">
+                        Cette section vous explique certains points sur meilleur recrutement
+                    </p>
+                        <div class="liste">
+                            <ul class="d-block list-flex">
+                                <li class="liste-item"  id="sous-titre1">Le Lieu de rendez-vous</li>
+                                <li class="liste-item"  id="sous-titre1">Faire preuve de bienveillance et se montrer accessible</li>
+                                <li class="liste-item"  id="sous-titre1">Préparer une entrer en matière</li>
+                                <li class="liste-item"  id="sous-titre1">Etre clair et précis</li>
+                                <li class="liste-item"  id="sous-titre1">Valoriser le candidat</li>
+                            </ul>
+                        </div>
+                </div>
+               
+            </div>
+           
+         
+         <div class="col-md-5">
+             <div class="container" id="c2" data-aos="zoom-in-down" data-aos-duration="2000">
+                
+                    <h4 class="text-center text-white" id="sous-titre"><strong>Comment gérer les candidats pendant la crise</strong></h4>
+                    <p class="text-center" id="sous-titre1">
+                        Cette section vous explique la gestion des candidats au temps de la crise 
+                    </p>
+                        <div class="paragraphe">
+                            <p class="text-start text-white" id="paragraph">
+                                Cette section vous explique la gestion des candidats au temps de la crise
+
+                                Tous les candidats n'en sont pas au même stade du processus de recrutement: certains viennent de postuler et attendent une réponse, 
+                                d'autres en sont au stade des entretiens, d'autres encore ont reçu une promesse d'embauche dans la période actuelle . 
+                                Dans un contexte dominé par l'incertitude et l'inquiétude, autres méfaits du coronavirus,
+                                 il convient de répondre aux réponses, même incomplètes, à chacun. 
+                            </p>
+                        </div>            
+             </div>
+         </div>
+        </div>
+
+         <div class="row justify-content-center">
+             <div class="col-md-5 mb-5" data-aos="zoom-in" data-aos-duration="3000">
+                 <div class="container" id="c3">
+                    <h4 class="text-center text-white" id="sous-titre"><strong>Comment gérer les candidats pendant la crise</strong></h4>
+                    <p class="text-center" id="sous-titre1">
+                        Cette section vous explique la gestion des candidats au temps de la crise 
+                    </p>
+                        <div class="paragraphe">
+                            <p class="text-start text-white" id="paragraph">
+                                Tous les candidats n'en sont pas au même stade du processus de recrutement: certains viennent de postuler et attendent une réponse, 
+                                d'autres en sont au stade des entretiens, d'autres encore ont reçu une promesse d'embauche dans la période actuelle. 
+                                Dans un contexte dominé par l'incertitude et l'inquiétude,
+                                 autres méfaits du coronavirus, il convient de répondre aux réponses, même incomplètes, à chacun.
+                            </p>
+                        </div>
+                        
+                 </div>
+             </div> 
+             
+             <div class="col-md-5 mb-5" data-aos="zoom-in" data-aos-duration="3000">
+                <div class="container" id="c4">
+                    <h4 class="text-center text-white"><strong>Soyez attentif(s)</strong></h4>
+                    <div class="paragraphe" id="c4-text">
+                        <p class="text-start text-white" id="paragraph">
+                            Les candidatures sont nombreuses, mais tous ses candidats ne font pas forcement la même chose,
+                             surveillez les meilleurs potentiels car vous êtes les seuls à vouloir des. les cv de ces candidats seront visibles à toutes les entreprises conectées à ce site;
+                             ne ratez pas votre chance, si vous comptez faire évouluez votre entreprise.
+                                 
+                        </p>
+                    </div>
+                    <div class="row justify-content-center">
+                        <ion-icon name="earth-sharp" id="logo-globe" class="mb-3"></ion-icon>                         
+                    </div>
+                </div>
+             </div>
+         </div>      
+    </div>
+          </div>
+    </div>
+
+{/block}
+
+{block name="entreprise"}
+<img src="{$url_base}public/image/imgleft.png" width="350px;" class="d-block" alt="image">
+{/block}
+{block name="logos"}
+<ul class="list-inline">
+    <li class="list-inline-item">
+        <img src="{$url_base}public/image/logo2.png" width="200" alt="">
+    </li>
+    <li class="list-inline-item">
+        <img src="{$url_base}public/image/logo3.png" width="200" alt="">
+    </li>
+    <li class="list-inline-item">
+        <img src="{$url_base}public/image/logo4.png" width="200" alt="">
+    </li>
+    <li class="list-inline-item">
+        <img src="{$url_base}public/image/login6.png" width="200" alt="">
+    </li>
+</ul>
+{/block}
+
+{block name="partenariat"}
+<div class="jumbotron" id="content-first">
+    <div class="row justify-content-start">
+        <div class="col-md-5">
+            <div class="partenariat mr-0">
+                <h1 class="text-white" id="h1-content-firt">Nos partenaires</h1>
+                 <div class="col-x-12">
+                    <ul class="list-inline">
+                        <li class="list-inline-item">
+                            <img src="{$url_base}public/image/partenaire1.png" width="90px" alt="EMI">
+                        </li>
+                        <li class="list-inline-item">
+                            <img src="{$url_base}public/image/partenaire2.png" width="90px" alt="IAE">
+                        </li>
+                        <li class="list-inline-item">
+                            <img src="{$url_base}public/image/partenaire3.png" width="200px" alt="ISI groupe">
+                        </li>
+                        <li class="list-inline-item">
+                            <img src="{$url_base}public/image/partenaire4.png" width="90px" alt="ISI groupe">
+                        </li>
+                        
+                    </ul>
+                 </div>
+            </div>
+            <h1 class="text-white" id="content-first-text">
+                Recrutez plus facilement les bons candidats pour votre entreprise
+            </h1> 
+            <div class="row justify-content-start">
+                <form  action="{$url_base}Entreprise/Offre">
+                    <div class="row mx-auto">
+                        <div class="col">
+                            <button class="btn btn-outline-info btn-lg mx-auto">Faire une offre</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{/block}
+
+{block name="logo-link"}
+<a href="{$url_base}Entreprise/index">
+    <img src="{$url_base}public/image/imgcool.png" data-toogle="tooltip" title="Acceuil" class="d-block mx-auto" width="90px" alt="logo">
+</a>
+{/block}

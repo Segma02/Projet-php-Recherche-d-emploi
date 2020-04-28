@@ -1,0 +1,263 @@
+{extends file="src/view/templates/index.html"}
+
+
+<!--Partie Offre Entreprise-->
+
+{block name="menu"}
+<ul class="nav justify-content-center">
+    <li class="nav-item" data-toogle="tooltip" title="Acceuil">
+        <a href="{$url_base}Entreprise/index" class="nav-link active text-secondary"><ion-icon name="home-outline" id="home"></ion-icon></a>
+    </li>                   
+    <li class="nav-item">                 
+       <a href="{$url_base}Entreprise/Offre" class="nav-link text-secondary" data-toogle="tooltip" title="Les offres"><ion-icon name="earth-outline" id="globe"></ion-icon></a>
+    </li>
+    <li class="nav-item">
+        <a href="{$url_base}Entreprise/CVthèque" class="nav-link text-secondary" data-toogle="tooltip" data-placement="top" title="CVthèque"><ion-icon name="newspaper-outline" id="mail"></ion-icon></a>
+    </li>
+    <li class="nav-item">
+        <a href="{$url_base}Entreprise/Publication" class="nav-link text-secondary" data-toogle="tooltip"  title="Notifications"><ion-icon name="notifications-outline" id="cloche"></ion-icon>{foreach from=$notif item=$count}<p class="badge badge-danger">{if $count eq 0}{else}{$count}{/if}</p>{/foreach}</a>
+    </li>
+    
+</ul>
+{/block}
+
+{block name="info"}
+<img src="{$url_base}public/image/entreprise/{$entreprise->getImage()}" class="align-self-start mt-3" width="120px" alt="">
+<div class="media-body mt-3 ml-2">
+        <p class="h5 text-secondary" style="text-decoration:underline"><strong>Votre profile <ion-icon name="business-sharp"></ion-icon></strong></p>
+        <p class=" text-start text-secondary"><ion-icon name="business-sharp"></ion-icon><strong> {$smarty.session.nom}</strong></p>
+        <p class=" text-start text-secondary"><ion-icon name="earth-sharp"></ion-icon><strong> {$entreprise->getPays()}</strong></p>
+        <p class=" text-start text-secondary"><ion-icon name="shield-sharp"></ion-icon><strong>{$entreprise->getStatut()}</strong></p>
+     
+</div>
+{/block}
+
+
+<!--Deconnexion-->
+{block name="login_out"}
+<form action="{$url_base}Entreprise/Deconnexion" method="POST">
+    <button class="btn btn-secondary btn-sm rounded-circle" data-toogle="tooltip" title="login out" name="exit" value="deconnexion"><ion-icon name="exit"></ion-icon></button>
+</form>
+{/block}
+
+
+{block name="index"}
+<div class="container-fluid-lg">
+    <div class="navbar navbar-expand-lg bg-dark d-md-block justify-content-between sticky-top d-lg-none" role="navigation">
+        <a href="{$url_base}Entreprise/index" class="navbar-brand">
+            <img src="{$url_base}public/image/imgcool.png" class="d-block mx-auto" width="33px"alt="">
+            <span class="text-secondary" id="text-logo"><strong>Smarta</strong></span>
+        </a>
+        <ul class="nav justify-content-end">
+            <li class="nav-item "><a href="{$url_base}Entreprise/index"   class="nav-link active text-secondary"><ion-icon name="home-outline" id="home"></ion-icon></a></li>                                
+            <li class="nav-item "><a href="{$url_base}Entreprise/Offre" class="nav-link text-secondary"><ion-icon name="earth-sharp" id="globe"></ion-icon></a></li>                               
+            <li class="nav-item "><a href="{$url_base}Entreprise/CVthèque" class="nav-link text-secondary"><ion-icon name="mail-sharp" id="mail"></ion-icon></a></li>          
+            <li class="nav-item "><a href="{$url_base}Entreprise/Publication" class="nav-link text-secondary"><ion-icon name="notifications-sharp" id="mail"></ion-icon></a></li>          
+            
+        </ul>
+    </div>
+    <div class="content" data-aos="zoom-in-down" data-aos-duration="1000" id="content-offre">
+        <header>
+            <div class="row justify-content-start">
+                <div class="col-sm-5 ml-2">
+                    <h1 class="text-white" id="content-first-text">
+                        Espace offre <ion-icon name="earth-outline"></ion-icon>
+                    </h1>
+                </div>
+            </div>
+            <div class="sous-titre">
+                <p class="text-white ml-0 p-sm-5" id="sous-titre">
+                    Profitez pleinement de nos services avec SMARTA<br>
+                    partout où vous êtes, vous pouvez envoyez vos offres<br>
+                    sur ce site. Nous nous arrangerons à les faire parvenir<br>
+                    aux candidats qui seront connecté sur notre plateforme
+                </p>
+            </div>
+        </div>
+        </header>
+
+        <div class="corps-content">
+            <div class="row justify-content-center mt-5">
+                <p class="text-secondary" id="after-image">Redaction d'offre</p>
+            </div>
+        </div>
+
+        <div class="row mb-5" id="form-offre">
+            <div class="col-md-7 mt-4">
+                <form method="POST">
+                    <div class="row ml-2">
+                        <div class="col-md-12">
+                            <span  class="text-secondary" style="font-family:calibri; font-size:30px;">Respensable de: </span>
+                            <input type="text" name="departement" id="departement" placeholder="Exemple Departement"><span id="error1"></span>
+                        </div>
+                    </div>
+                    <div class="row justify-content-start ml-2">
+                        <div class="col-sm-0">
+                           <span class="text-secondary"><ion-icon name="location"></ion-icon> {$entreprise->getPays()}</span>
+                        </div>
+                        <div class="col-sm-0 ml-1">
+                            <span class="text-secondary"><ion-icon name="reader-outline"></ion-icon><input type="text" name="contrat" placeholder="contrat" id="contrat"><span id="error2"></span></span>
+                        </div>
+                    </div>
+                    <div class="col-md-12 d-none d-block d-lg-none">
+                        <div class="content-info mt-4">
+                            <div class="row justify-content-center">
+                                <span class="text-secondary" style="font-size: 35px;"><ion-icon name="information-circle"></ion-icon></span>
+                            </div>
+                            <div class="row justify-content-start">
+                                <div class="col-md-6 ml-5">
+                                    <p class="text-info"><ion-icon name="business"></ion-icon> Nom:<span style="font-size: 15px;"><strong>{$smarty.session.nom}</strong></span></p>
+                                    <p class="text-info"><ion-icon name="globe"></ion-icon> Type:<span> {$entreprise->getCategorie()}</span></p>
+                                    <p class="text-info"><ion-icon name="shield"></ion-icon> Statut:<span> {$entreprise->getStatut()}</span></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>  
+                    <p class="text-secondary ml-2 mt-5" style="font-size:25px;" id="poste">Poste</p>
+                    <div class="form-row justify-content-start ml-2">
+                        <div class="col-md-10">
+                            <textarea name="poste" id="poste-text" cols="35" rows="8" placeholder="Ecrivez quelque chose"></textarea>
+                        </div>
+                    </div>
+                    <p class="text-info"><ion-icon name="at"></ion-icon><input type="text" id="adresse" class="text-info" name="adresse" value="{$entreprise->getAdresse()}" style="border: none;background-color: #F5F5F5;"></p>
+                        
+                    <div class="row justify-content-start ml-2 mt-5 d-block d-lg-none">
+                        <div class="col-md-5" id="col-signature">
+                            <h2 class="text-secondary">Signature</h2>
+                            <img src="{$url_base}public/image/signature.png" width="120px;" alt="signature">
+                        </div>
+                    </div>
+                  
+                    <input type="button" id="btn-poste" name="publier" value="publier" class="btn btn-info btn-md mt-3 mb-3 ml-2">
+
+                </form>
+            </div>
+            <div class="col-md-5 d-none d-lg-block">
+                <div class="content-info mt-4 shadow-lg">
+                    <div class="row justify-content-center">
+                        <span class="text-secondary" style="font-size: 35px;"><ion-icon name="information-circle"></ion-icon></span>
+                    </div>
+                    <div class="row justify-content-start">
+                        <div class="col-md-6 ml-5">
+                            <p class="text-info"><ion-icon name="business"></ion-icon> Nom:<span  style="font-size: 15px;"><strong> {$smarty.session.nom}</strong></span></p>
+                            <p class="text-info"><ion-icon name="globe"></ion-icon> Type:<span> {$entreprise->getCategorie()}</span></p>
+                            <p class="text-info"><ion-icon name="shield"></ion-icon> Statut:<span> {$entreprise->getStatut()}</span></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row justify-content-start ml-2 mt-5">
+                    <div class="col-md-5" id="col-signature">
+                        <h2 class="text-secondary">Signature</h2>
+                        <img src="{$url_base}public/image/signature.png" width="120px;" alt="signature">
+                    </div>
+                </div>
+            </div>  
+        </div>
+        <div class="row justify-content-center" style="margin-top: 20%;">
+            <h1 class="text-secondary text-center" style="font-weight: bolder;">Options <ion-icon name="settings-sharp"></ion-icon></h1>
+        </div>
+        <div class="row justify-content-center">
+            <p class="text-secondary"data-aos="zoom-out" data-aos-duration="1000">Smarta vous propose ces options</p>
+        </div>
+    
+        <div class="row justify-content-center mt-5 mb-5">
+                <form class="mr-1"></form>
+                    <div class="form-row">
+                        <div class="col-md-6">
+                            <button class="btn btn-secondary btn-lg" type="button" id="btnOption1"  data-toggle="tooltip" title="Stats">
+                                <img src="{$url_base}public/image/bar.svg" width="60" alt="" id="icon-option1">
+                            </button>
+                        </div>
+                    </div>
+                </form>
+                
+                <form class="ml-2">
+                    <div class="form-row">
+                        <div class="col-md-6">
+                            <button class="btn btn-secondary btn-lg" type="button" id="btnOption2"  data-toggle="tooltip" title="Mes offres">
+                                <ion-icon name="file-tray-full-sharp" id="icon-option2"></ion-icon>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            
+               
+        </div>
+        <div class="row justify-content-center">
+            {include file="src/view/entreprise/Chart.html"}
+        </div>
+        <div class="row justify-content-center mb-5" id="mespostes">
+            {foreach from=$row item=$idoffre}
+            {if $idoffre eq 0}
+            <div class="row justify-content-center" id="chart_div">
+                <div class="col-xs-12" data-aos="zoom-in-down" data-aos-duration="2000">
+                 <h1 class="text-secondary p-sm-3"><strong>Offre non disponible<ion-icon name="reader-sharp"></ion-icon></h1>
+                 <p class="text-secondary text-center" style="font-weight: bolder;">Aucune offre n'a été effectuée</p>
+                </div>
+            </div>
+            {else}
+           
+            <div class="col-md-9" id="publication">
+
+                {foreach from=$offres item=$offre}
+                <div class="card shadow mt-4" id="offre-card{$offre->getId()}">
+                    <div class="card-body">
+                        <div>
+                            <div>
+                                <img src="{$url_base}public/image/entreprise/{$offre->getImage()}" width="30">
+                                <span class="text-secondary"><strong>Vous</strong></span>
+                            </div>
+                            <hr class="my-2">
+                            <p class="text-secondary"><strong><ion-icon name="reader-sharp"></ion-icon>Contrat: {$offre->getContrat()}</strong></p>
+                            <p class="text-secondary" style="margin-top: -12px;"><strong><ion-icon name="business-sharp"></ion-icon>{$offre->getDepartement()}</strong></p>
+                        </div>
+                           <div class="alert alert-secondary">
+                                <p class="text-secondary">
+                                    <p class="text-secondary"><strong style="font-family: 'Alex Brush', cursive; font-size: 25px; text-decoration: underline grey;">Smarta <img src="{$url_base}public/image/imgcool.png" width="20"></strong> message</p>
+                                    {$offre->getPoste()}
+                                </p>
+                           </div>
+                           <div>
+                                <h6 class="text-primary"><ion-icon name="at"></ion-icon><strong>{$offre->getAdresse()}</strong></h6>
+                           </div>
+                    </div>
+                    <div class="row">
+                        <a class="text-secondary ml-4" style="font-size: 25px; cursor:pointer" data-toggle="modal" data-target="#modal{$offre->getId()}" data-toggle="tooltip" title="Editer" id="modal" value="{$offre->getId()}"><ion-icon name="reader-outline"></ion-icon></a>
+                        <div class="spinner-border text-secondary ml-3 mt-0 mb-3 invisible">
+                            <span class="sr-only">rafraichissement</span>
+                        </div>
+                    </div>
+                </div>
+                {include file="src/view/entreprise/modalEdit.html"} 
+               {/foreach}
+            </div>
+            
+            {/if}
+          {/foreach}
+        </div>
+</div>
+{/block}
+
+{block name="entreprise"}
+<img src="{$url_base}public/image/imgleft.png" class="d-block"  width="350px;" alt="image">
+{/block}
+{block name="logos"}
+    <div class="row justify-content-center" id="offre-banner">
+        <div class="col-sm-10 p-md-2">
+            <h1 class="text-secondary text-center" id="smarta"><strong>Smarta <img src="{$url_base}public/image/imgcool.png" width="50" alt=""></strong></h1>
+            <p class="text-secondary text-center" style="font-size: 18px;">
+               <strong> Leader numéro un dans la recherche d'emploi</strong>
+            </p>
+            <p class="text-secondary text-center">Plusieurs clients nous font confiances,<br> vous aussi faites nous confiance,<br> parce que votre maison c'est nous.</p>
+        </div>
+        <div class="col-sm-5">
+            <img src="{$url_base}public/image/img11.png" class=" mt-5 d-none w-100 d-sm-block" alt="">
+        </div>
+    </div>
+{/block}
+
+{block name="logo-link"}
+<a href="{$url_base}Candidat/index">
+    <img src="{$url_base}public/image/imgcool.png" data-toogle="tooltip" title="Acceuil" class="d-block mx-auto" width="90px" alt="logo">
+</a>
+{/block}

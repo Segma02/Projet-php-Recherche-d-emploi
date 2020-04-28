@@ -1,0 +1,64 @@
+{extends file="src/view/templates/index.html"}
+
+{block name="index"}
+    <div class="container-fluid-lg">
+         <div class="row justify-content-center" style="border-bottom: 5px solid #E59F00;" id="bar-recherche">
+             <div class="col-md-8">
+                <form action="" class="d-block mt-5 mb-5">
+                    <div class="input-group">
+                        <input type="text" class="form-control rounded" name="" id="" placeholder="Rechercher" style="border: 1px solid #F8F9FA;">
+                            <div class="input-group-prepend">
+                              <button class="btn btn-secondary btn-md rounded-circle ml-1"><ion-icon name="search"></ion-icon></button>
+                            </div>
+                    </div>          
+             </form>
+             </div>
+         </div>
+         <div class="row justify-content-center" id="row-offre">
+
+            <div class="col-md-12">
+                {foreach from=$row item=$idoffre}<h3 class="text-secondary" style="font-weight: bolder; text-decoration:underline #E59F00;">POSTES({$idoffre})</h3>{/foreach}
+                
+                {if $smarty.session.count == null}
+                <h1 class="text-center mt-5" style="color:#C5C7CA; font-size: 50px; font-weight: bolder;" data-toogle="tooltip" title="Supprimer">AUCUN POSTE <ion-icon name="sad-outline"></ion-icon></h1>
+                {else}
+                <div class="liste-poste">
+                    {foreach from=$offres item=$offre}
+                    <div class="card shadow mt-4">
+                        <div class="card-body">
+                            <div>
+                                <h4 class="text-secondary">
+                                    <strong>{$offre->getDepartement()}</strong>  
+                                </h4>
+                                <hr class="my-auto">
+                                <p class="text-secondary"><strong><ion-icon name="reader-sharp"></ion-icon>Contrat: {$offre->getContrat()}</strong></p>
+                            </div>
+                               <div>
+                                <p class="text-secondary mt-3">
+                                    {$offre->getPoste()}
+                                </p>
+                               </div>
+                               <div>
+                                    <h6 class="text-secondary"><ion-icon name="at"></ion-icon><strong>{$offre->getAdresse()}</strong></h6>
+                               </div>
+                               <div class="row justify-content-end">
+                                   <p class="text-secondary mr-3">
+                                    Publié le {$offre->getDate()}
+                                   </p>
+                               </div>
+                               <div class="row justify-content-start">
+                                   <a href="{$url_base}Entreprise/Offre?delete={$offre->getId()}" data-toogle="tooltip" title="supprimer" class="text-secondary ml-3" style="font-size: 30px;"><ion-icon name="trash"></ion-icon></a>
+                               </div>
+                        </div>
+                    </div>
+                    <hr style="background-color:#E59F00;">
+                {/foreach}
+                </div>
+                {/if}
+            </div>
+         </div>
+    </div>
+{/block}
+{block name="entreprise"}
+<img src="{$url_base}public/image/imgleft.png" width="350px;" class="d-block" alt="image">
+{/block}
